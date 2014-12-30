@@ -1,21 +1,16 @@
-GCC = gcc
-RM = rm -f
-TAR = tar
-CP = cp
+OBJ=main.o
+CFLAGS=-Wall
 
-.PHONY: all
-all:
-	${MAKE} server
-server:
-	${GCC} -c *.c
-	${GCC} -o ChatHub-C *.o
-clean:
-	${RM} *.o
-	${RM} ChatHub-C
-
+Chapat:
+	gcc $(CFLAGS) -o Chapat $(OBJ)
+main.o:
+	gcc $(CFLAGS) -c main.c
 .PHONY: clean
+clean:
+	rm Chapat $(OBJ)
+.PHONY: install
 install:
-	${MAKE} server
-	${CP} ChatHub-C.sh /etc/init.d/ChatHub-C
-	${CP} ChatHub-C /usr/sbin/
+	${MAKE} Chapat
+	cp Chapat.sh /etc/init.d/ChatHub-C
+	cp Chapat /usr/sbin/
 
