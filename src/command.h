@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue 30 Dec 2014 11:31:05 PM IRST
+ * [] Last Modified : Wed 31 Dec 2014 07:26:45 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -20,7 +20,11 @@ void command_dispatcher(int socket_fd, Message* message);
 void join_command(int group_id, int socket_fd);
 
 void leave_command(int group_id, int socket_fd);
-
+/*
+ * verb = send
+ * arg = message
+ * group_id != -1
+*/
 void send_command(int group_id, Message* message, int socket_fd); 
 
 #endif
