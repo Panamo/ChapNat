@@ -7,18 +7,13 @@ In this project we using kernel-coding style from Linus Torvalds and using some 
 
 Finally our sever, client model created as follow:  
 
-Chapat:  
-       Java  
-|-------------------|  
-|DB connected server|  
-|-------------------|  
-Port: 13731  
-  
-      Pure C  
-|-------------------|  
-|connection server  |  
-|-------------------|  
-Port: 13732  
+Chapat:
+1) DB Connected Server:  
+  1) Java  
+  2) Port: 13731  
+2) Connection Server:  
+  1) Pure C  
+  2) Port: 13732  
   
 First GapApp must connect to DB connected server and get it's user UUID and then connect to connection server for telecominucation with other
 users.
