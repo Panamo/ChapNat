@@ -1,10 +1,12 @@
-OBJ=main.o
+OBJ=main.o common.o
 CFLAGS=-Wall
 
-Chapat:
+Chapat: $(OBJ)
 	gcc $(CFLAGS) -o Chapat $(OBJ)
-main.o:
+main.o: main.c common.h
 	gcc $(CFLAGS) -c main.c
+common.o: common.c common.h
+	gcc $(CFLAGS) -c common.c
 .PHONY: clean
 clean:
 	rm Chapat $(OBJ)
