@@ -9,11 +9,11 @@ Finally our sever, client model created as follow:
 
 Chapat:
 1) DB Connected Server:  
-  1) Java  
-  2) Port: 13731  
+  a) Java  
+  b) Port: 13731  
 2) Connection Server:  
-  1) Pure C  
-  2) Port: 13732  
+  a) Pure C  
+  b) Port: 13732  
   
 First GapApp must connect to DB connected server and get it's user UUID and then connect to connection server for telecominucation with other
 users.
