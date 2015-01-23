@@ -5,58 +5,41 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue 30 Dec 2014 11:31:04 PM IRST
+ * [] Last Modified : Sat Jan 24 03:17:46 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "message.h"
 
-int serialize_message(char* buffer, const Message* message){
-	return sprintf(buffer, "%s:%s:%d:%s\n", message->verb, message->arg, message->group_id, message->client_name);
+int serialize_message(FILE *dest, const struct message *message)
+{
+	return fprintf(dest, "%s %d %s %d\n%s", message->verb,
+			message->group_id, message->client_name,
+			message->m_size, message->body);
 }
 
-int deserialize_message(char* buffer, Message* message){
-	int general_index = 0;
+int deserialize_message(FILE *src, struct message *message)
+{
+	if (fscanf(src, "%s", message->verb) != 1)
+		return -1;
 
-	int special_index = 0;
-	while(buffer[general_index] != ':'){
-		message->verb[special_index] = buffer[general_index];
-		special_index++;
-		general_index++;
-	}
-	message->verb[special_index] = '\0';
-	general_index++;
-	
-	special_index = 0;
-	while(buffer[general_index] != ':'){
-		message->arg[special_index] = buffer[general_index];
-		special_index++;
-		general_index++;
-	}
-	message->arg[special_index] = '\0';
-	general_index++;
+	if (fscanf(src, "%d", &message->group_id) != 1)
+		return -1;
 
-	char temp[255];
-	special_index = 0;
-	while(buffer[general_index] != ':'){
-		temp[special_index] = buffer[general_index];
-		special_index++;
-		general_index++;
-	}
-	temp[special_index] = '\0';
-	sscanf(temp, "%d", &message->group_id);
-	general_index++;
-	
-	special_index = 0;
-	while(buffer[general_index] != '\n'){
-		message->client_name[special_index] = buffer[general_index];
-		special_index++;
-		general_index++;
-	}
-	message->client_name[special_index] = '\0';
+	if (fscanf(src, "%s", message->client_name) != 1)
+		return -1;
 
-	return general_index + 1;
+	if (fscanf(src, "%d", &message->m_size) != 1)
+		return -1;
+
+	message->body = malloc(message->m_size * sizeof(char) + 1);
+	/* Read message body start indicator ('\n') */
+	fgetc(src);
+	return fread(message->body, message->m_size, sizeof(char), src);
+
 }
