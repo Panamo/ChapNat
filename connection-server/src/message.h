@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed 31 Dec 2014 01:23:16 AM IRST
+ * [] Last Modified : Sat Jan 24 02:12:32 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -19,10 +19,11 @@
  * message struct size must be less than
  * 4 * 255 byte
  * @verb: send join leave
- * @arg:
- * if verb has no argument it must be " "
- * @group_id:
- * if verb has no group id it must be -1
+ *
+ * @arg: if verb has no argument it must be " "
+ *
+ * @group_id: if verb has no group id it must be -1
+ *
  * @client_name: username of client
  * +------------+------------+-------------+------------+
  * |
