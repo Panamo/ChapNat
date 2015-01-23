@@ -1,5 +1,5 @@
 OBJ=main.o common.o
-CFLAGS=-Wall
+CFLAGS=-Wall -g
 
 Chapat: $(OBJ)
 	gcc $(CFLAGS) -o Chapat $(OBJ)
