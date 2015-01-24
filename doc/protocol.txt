@@ -8,12 +8,14 @@ port: 13732
 
 @ verb: send / join(Both sign-in and joining to a group) / leave / check(who is online?)
 
-@ dest_id: It can be both group or a single client UUID
+@ dest_id: It can be both group or a single destination client UUID
+
+@ src_id: single source client UUID
 
 @ size: sizeof message body in bytes
 
  +------------+--------------------------+------------+
- |    verb    |         dest_id          |     size   |
+ |    verb    |   dest_id   |   src_id   |     size   |
  +------------+--------------------------+------------+
  |                                                    |
  |                  Message Body                      |
