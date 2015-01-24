@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat Jan 24 18:00:17 2015
+ * [] Last Modified : Sat 24 Jan 2015 06:24:57 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -25,10 +25,12 @@
  *
  * @dest_id: It can be both group or a single client UUID
  *
+ * @src_id: single source client UUID
+ *
  * @size: sizeof message body in bytes
  *
  * +------------+--------------------------+------------+
- * |    verb    |         dest_id          |    size    |
+ * |    verb    |   dest_id  |    src_id   |    size    |
  * +------------+--------------------------+------------+
  * |                                                    |
  * |                  Message Body                      |
@@ -39,6 +41,7 @@
 struct message {
 	char verb[5];
 	char dest_id[255];
+	char src_id[255];
 	int m_size;
 	char *body;
 };

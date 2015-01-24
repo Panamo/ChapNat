@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat Jan 24 18:01:23 2015
+ * [] Last Modified : Sat 24 Jan 2015 06:25:14 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,8 +18,8 @@
 
 int serialize_message(FILE *dest, const struct message *message)
 {
-	return fprintf(dest, "%s %s %d\n%s", message->verb,
-			message->dest_id, message->m_size, message->body);
+	return fprintf(dest, "%s %s %s %d\n%s", message->verb, message->dest_id,
+			message->src_id, message->m_size, message->body);
 }
 
 int deserialize_message(FILE *src, struct message *message)
@@ -28,6 +28,9 @@ int deserialize_message(FILE *src, struct message *message)
 		return -1;
 
 	if (fscanf(src, "%s", message->dest_id) != 1)
+		return -1;
+	
+	if (fscanf(src, "%s", message->src_id) != 1)
 		return -1;
 
 	if (fscanf(src, "%d", &message->m_size) != 1)
