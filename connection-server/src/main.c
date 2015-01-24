@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed 31 Dec 2014 01:18:09 AM IRST
+ * [] Last Modified : Sat Jan 24 04:05:22 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -19,23 +19,23 @@
 #include <syslog.h>
 #include <string.h>
 
-#include "server_net.h"
+#include "message.h"
+#include "net.h"
 #include "error_functions.h"
 #include "common.h"
-#include "command.h"
 
 static void skeleton_daemon(void);
 
 int main(int argc, char *argv[])
 {
 	if (argc < 2)
-		use_die("usage : server server_ip_address server_port_number");
+		udie("usage : server_port_number");
 
-	server_port_number = atoi(argv[1]);
+	int server_port_number = atoi(argv[1]);
 
-	skeleton_daemon();
+	//skeleton_daemon();
 
-	int server_socket_fd = net_init();
+	int server_socket_fd = net_init(server_port_number);
 
 	int socket_fds[MAX_CONN];
 	int number = 0;
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 		}
 
 		if (select(max_socket_fd + 1, &socket_fds_set, NULL, NULL, NULL) < 0)
-			log_error("select");
+			sdie("select");
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
 			int fd = accept_connection();
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 		}
 		for (i = 0; i < number; i++) {
 			if (FD_ISSET(socket_fds[i], &socket_fds_set)) {
-				Message message;
+				struct message message;
 				if (recv_message(&message, socket_fds[i]) <= 0) {
 					close(socket_fds[i]);
 					number--;
@@ -72,7 +72,9 @@ int main(int argc, char *argv[])
 					continue;
 				}
 
-				command_dispatcher(socket_fds[i], &message);
+				printf("%s\n", message.body);
+
+				//command_dispatcher(socket_fds[i], &message);
 			}
 		}
 

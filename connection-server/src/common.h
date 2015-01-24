@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Wed 31 Dec 2014 05:16:27 PM IRST
+ * [] Last Modified : Sat Jan 24 03:29:57 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,7 +14,7 @@
 #define COMMON_H
 
 #define MAX_BUFF (1000 * 1000)
-#define MAX_CONN 1024
+#define MAX_CONN (1024)
 
 void sdie(const char *fmt, ...);
 void udie(const char *fmt, ...);

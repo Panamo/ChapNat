@@ -1,12 +1,14 @@
-OBJ=main.o common.o
+OBJ=main.o common.o message.o net.o error_functions.o
 CFLAGS=-Wall -g
 
 Chapat: $(OBJ)
 	gcc $(CFLAGS) -o Chapat $(OBJ)
-main.o: main.c common.h
-	gcc $(CFLAGS) -c main.c
-common.o: common.c common.h
-	gcc $(CFLAGS) -c common.c
+main.o: common.h net.h message.h
+common.o: common.h
+message.o: message.h
+net.o: net.h common.h message.h error_functions.h
+error_functions.o:
+
 .PHONY: clean
 clean:
 	rm Chapat $(OBJ)
