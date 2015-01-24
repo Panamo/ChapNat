@@ -6,17 +6,15 @@ port: 13732
   after message header there is just ONE '\n' and then message
   body come.
 
-@ verb: send join leave
+@ verb: send / join(Both sign-in and joining to a group) / leave / check(who is online?)
 
-@ group_id: if verb has no group id it must be -1
-
-@ client_name: uuid of client
+@ dest_id: It can be both group or a single client
 
 @ size: sizeof message body in bytes
 
- +------------+------------+-------------+------------+
- |    verb    |  group_id  | client_name |     size   |
- +------------+------------+-------------+------------+
+ +------------+--------------------------+------------+
+ |    verb    |         dest_id          |     size   |
+ +------------+--------------------------+------------+
  |                                                    |
  |                  Message Body                      |
  |                                                    |
