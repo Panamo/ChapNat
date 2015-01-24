@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat Jan 24 03:05:57 2015
+ * [] Last Modified : Sat Jan 24 18:00:17 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -21,17 +21,15 @@
  * after message header there is just ONE '\n' and then message
  * body come.
  *
- * @verb: send join leave
+ * @verb: send join leave check
  *
- * @group_id: if verb has no group id it must be -1
- *
- * @client_name: uuid of client
+ * @dest_id: It can be both group or a single client UUID
  *
  * @size: sizeof message body in bytes
  *
- * +------------+------------+-------------+------------+
- * |    verb    |  group_id  | client_name |     size   |
- * +------------+------------+-------------+------------+
+ * +------------+--------------------------+------------+
+ * |    verb    |         dest_id          |    size    |
+ * +------------+--------------------------+------------+
  * |                                                    |
  * |                  Message Body                      |
  * |                                                    |
@@ -40,8 +38,7 @@
 
 struct message {
 	char verb[5];
-	int group_id;
-	char client_name[255];
+	char dest_id[255];
 	int m_size;
 	char *body;
 };

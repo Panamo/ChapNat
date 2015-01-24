@@ -1,7 +1,7 @@
 OBJ=main.o common.o message.o net.o error_functions.o
 CFLAGS=-Wall -g
 
-Chapat: $(OBJ)
+Chapat.out: $(OBJ)
 	gcc $(CFLAGS) -o Chapat $(OBJ)
 main.o: common.h net.h message.h
 common.o: common.h
