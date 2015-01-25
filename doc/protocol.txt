@@ -1,3 +1,10 @@
+In The Name Of God
+
+Parham Alvani <parham.alvani@gmail.com>
+Mohammad Reza Mahboubi Ardakani <mrmahboubi95@yahoo.com>
+
+##############################################################
+
 connection server:
 port: 13732
 
@@ -6,7 +13,8 @@ port: 13732
   after message header there is just ONE '\n' and then message
   body come.
 
-@ verb: send / join(Both sign-in and joining to a group) / leave / check(who is online?)
+@ verb: send / join(Both sign-in and joining to a group)
+        / leave / check(who is online?)
 
 @ dest_id: It can be both group or a single destination client UUID
 
@@ -25,3 +33,9 @@ port: 13732
 * other options can add without so much difficulty in this
   protocol with add field in message header and change seriallize
   function.
+* every non-standard packet dropped.
+
+=> join: verb = join
+         dest_id = client_id
+	 src_id = client_id
+	 size = 0
