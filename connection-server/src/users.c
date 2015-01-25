@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun 25 Jan 2015 07:14:54 AM IRST
+ * [] Last Modified : Sun 25 Jan 2015 07:18:26 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -90,4 +90,4 @@ void snd_user(const struct message *message, int socket)
 		printf("%d\n", *fd);
 	else
 		printf("Not Found\n");
-
+}
