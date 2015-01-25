@@ -5,16 +5,36 @@ Parham Alvani <parham.alvani@gmail.com>
 ##############################################################
 
 Chapat Object:
-
+   .
+   .
+   .
+|-----|
+|group|
+|-----|
+   |
+|------|  |------|  |------|  |-----|  |------|
+|clinet|->|client|->|client|->|group|->|client|.....
+|------|  |------|  |------|  |-----|  |------|
+                                 |
+			      |------|  |------|
+			      |client|->|client|...
+			      |------|  |------|
 struct chobj {
 	int is_group;
 	char id[255];
+	chobj *child;
+	chobj *parent;
 	chobj *next;
 	... (Techninal fields used only in networking)
 }
 
-chobj (Chapat Object) is a most important structure in chapat,
-if is_group field in chobj != 1 then it is a person not group
-so next field must be NULL, otherwise it is a group and next
-field point to members in linked-list manner and networking
-field must be set to zero.
+ * chobj (Chapat Object) is a most important structure in chapat,
+   if is_group field in chobj != 1 then it is a person not group
+   so next field must be NULL and then change by it's parent group
+   otherwise it is a group and next field point to members in
+   linked-list manner and networking field must be set to zero.
+ 
+ * If chobj have child but it is not a group, PANIC /\/\/\
+
+ * Please remeber every person can join only in ONE group !!!!
+   if you do not like it, so FIX IT.
