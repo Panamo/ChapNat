@@ -1,0 +1,20 @@
+In The Name Of God
+
+Parham Alvani <parham.alvani@gmail.com>
+
+##############################################################
+
+Chapat Object:
+
+struct chobj {
+	int is_group;
+	char id[255];
+	chobj *next;
+	... (Techninal fields used only in networking)
+}
+
+chobj (Chapat Object) is a most important structure in chapat,
+if is_group field in chobj != 1 then it is a person not group
+so next field must be NULL, otherwise it is a group and next
+field point to members in linked-list manner and networking
+field must be set to zero.
