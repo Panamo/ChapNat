@@ -36,6 +36,7 @@ port: 13732
 * every non-standard packet dropped.
 
 => join: verb = join
-         dest_id = client_id
+         dest_id = group_id
 	 src_id = client_id
 	 size = 0
+ * please note that if group_id == clien_id, your client will be signed in !! :-)
