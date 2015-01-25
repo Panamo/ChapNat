@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun Jan 25 08:13:39 2015
+ * [] Last Modified : Sun Jan 25 08:32:16 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,7 +18,7 @@
 #include "message.h"
 #include "users.h"
 
-static GHashTable *users = NULL;
+static GHashTable *users;
 
 int main()
 {
@@ -35,9 +35,10 @@ int main()
 
 /*
  * @ typedef const void *gconstpointer
- * An untyped pointer to constant data. The data pointed to should not be changed.
- * This is typically used in function prototypes to indicate that the data pointed
- * to will not be altered by the function.
+ * An untyped pointer to constant data.
+ * The data pointed to should not be changed.
+ * This is typically used in function prototypes to indicate
+ * that the data pointed to will not be altered by the function.
  *
  * @ typedef gint gboolean
  * A standard boolean type.
@@ -59,7 +60,8 @@ static void destroy_value(gpointer data)
 
 void init_user(void)
 {
-	users = g_hash_table_new_full(g_str_hash, g_str_equal, destroy_key, destroy_value);
+	users = g_hash_table_new_full(g_str_hash, g_str_equal,
+			destroy_key, destroy_value);
 }
 
 void add_user(const struct message *message, int socket)
@@ -71,7 +73,8 @@ void add_user(const struct message *message, int socket)
 		printf("%d\n", *fd);
 	} else {
 		g_hash_table_insert(users,
-				g_strdup(message->dest_id), g_memdup(&socket, sizeof(socket)));
+				g_strdup(message->dest_id),
+				g_memdup(&socket, sizeof(socket)));
 	}
 }
 
@@ -82,7 +85,7 @@ void del_user(const struct message *message, int socket)
 void snd_user(const struct message *message, int socket)
 {
 	int *fd;
-	
+
 	fd = g_hash_table_lookup(users, message->dest_id);
 	if (fd)
 		printf("%d\n", *fd);
