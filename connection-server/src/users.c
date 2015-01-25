@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun 25 Jan 2015 07:18:26 AM IRST
+ * [] Last Modified : Sun Jan 25 08:13:39 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,8 +22,6 @@ static GHashTable *users = NULL;
 
 int main()
 {
-	printf("start\n");
-
 	init_user();
 	struct message *m1 = malloc(sizeof(struct message));
 	strcpy(m1->dest_id, "12345");
@@ -61,7 +59,7 @@ static void destroy_value(gpointer data)
 
 void init_user(void)
 {
-	users = g_hash_table_new_full(NULL, g_str_equal, destroy_key, destroy_value);
+	users = g_hash_table_new_full(g_str_hash, g_str_equal, destroy_key, destroy_value);
 }
 
 void add_user(const struct message *message, int socket)
