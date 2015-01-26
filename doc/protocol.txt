@@ -13,8 +13,9 @@ port: 13732
   after message header there is just ONE '\n' and then message
   body come.
 
-@ verb: send / join(Both sign-in and joining to a group)
-        / leave / check(who is online?)
+@ verb: send / join (add yourself into group)
+	/ add (add somebody else into group)
+        / leave / check (who is online?)
 
 @ dest_id: It can be both group or a single destination client UUID
 
