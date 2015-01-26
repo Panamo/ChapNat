@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Mon Jan 26 20:41:25 2015
+ * [] Last Modified : Mon 26 Jan 2015 10:42:25 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -61,10 +61,10 @@ void add_user(const struct message *message, int socket)
 {
 	struct chobj *new;
 	struct sockaddr_in client_addr;
-	socklen_t *len = NULL;
+	socklen_t len = 0;
 
 	getsockname(socket, (struct sockaddr *) &client_addr,
-			len);
+			&len);
 	new = g_hash_table_lookup(users, message->dest_id);
 	if (new) {
 		printf("Found\n");
