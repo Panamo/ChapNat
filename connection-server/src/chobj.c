@@ -5,13 +5,14 @@
  *
  * [] Creation Date : 26-01-2015
  *
- * [] Last Modified : Mon Jan 26 17:23:02 2015
+ * [] Last Modified : Mon Jan 26 20:13:12 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
 #include <glib.h>
 #include <string.h>
+#include <stdlib.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -23,11 +24,18 @@ struct chobj *chobj_new(const char *id, int socket,
 		struct sockaddr_in addr)
 {
 	struct chobj *new = g_new(struct chobj, 1);
+
 	new->child = NULL;
 	new->fd = socket;
 	strcpy(new->id, id);
 	new->client_addr = addr;
 	return new;
+}
+
+void chobj_del(struct chobj *chobj)
+{
+	g_slist_free(chobj->child);
+	free(chobj);
 }
 
 void chobj_add_child(struct chobj *parent,
@@ -39,5 +47,5 @@ void chobj_add_child(struct chobj *parent,
 void chobj_del_child(struct chobj *parent,
 		struct chobj *child)
 {
-	
+
 }

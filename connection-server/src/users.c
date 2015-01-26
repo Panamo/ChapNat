@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Mon Jan 26 14:12:53 2015
+ * [] Last Modified : Mon Jan 26 20:41:25 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,10 +14,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
 
 #include "message.h"
 #include "net.h"
 #include "users.h"
+#include "chobj.h"
 
 static GHashTable *users;
 
@@ -43,7 +48,7 @@ static void destroy_key(gpointer data)
 
 static void destroy_value(gpointer data)
 {
-	g_free(data);
+	chobj_del(data);
 }
 
 void init_user(void)
@@ -54,15 +59,22 @@ void init_user(void)
 
 void add_user(const struct message *message, int socket)
 {
-	int *fd;
+	struct chobj *new;
+	struct sockaddr_in client_addr;
+	socklen_t *len = NULL;
 
-	fd = g_hash_table_lookup(users, message->dest_id);
-	if (fd) {
-		printf("%d\n", *fd);
+	getsockname(socket, (struct sockaddr *) &client_addr,
+			len);
+	new = g_hash_table_lookup(users, message->dest_id);
+	if (new) {
+		printf("Found\n");
 	} else {
+		printf("%s is added\n", message->dest_id);
+		new = chobj_new(message->dest_id,
+				socket, client_addr);
 		g_hash_table_insert(users,
 				g_strdup(message->dest_id),
-				g_memdup(&socket, sizeof(socket)));
+				new);
 	}
 }
 
@@ -72,11 +84,13 @@ void del_user(const struct message *message, int socket)
 
 void snd_user(const struct message *message, int socket)
 {
-	int *fd;
+	struct chobj *new;
 
-	fd = g_hash_table_lookup(users, message->dest_id);
-	if (fd)
-		send_message(message, *fd);
-	else
+	new = g_hash_table_lookup(users, message->dest_id);
+	if (new) {
+		printf("sned to %s\n", new->id);
+		send_message(message, new->fd);
+	} else {
 		printf("Not Found\n");
+	}
 }

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat Jan 24 03:45:03 2015
+ * [] Last Modified : Mon Jan 26 20:43:43 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -27,6 +27,7 @@ static int server_socket_fd;
 int net_init(int server_port_number)
 {
 	struct sockaddr_in server_addr;
+
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_addr.sin_port = htons(server_port_number);
@@ -35,7 +36,7 @@ int net_init(int server_port_number)
 	if (server_socket_fd == -1)
 		sdie("socket()");
 
-	if (bind(server_socket_fd, (struct sockaddr*)&server_addr,
+	if (bind(server_socket_fd, (struct sockaddr *)&server_addr,
 				sizeof(server_addr)) == -1)
 		sdie("bind()");
 
@@ -53,17 +54,17 @@ int accept_connection(void)
 int send_message(const struct message *message, int socket_fd)
 {
 	FILE *socket_file = fdopen(socket_fd, "r+");
-	
+
 	if (socket_file == NULL)
 		log_error("fdopen()");
-	
+
 	return serialize_message(socket_file, message);
 }
 
 int recv_message(struct message *message, int socket_fd)
 {
 	FILE *socket_file = fdopen(socket_fd, "r+");
-	
+
 	if (socket_file == NULL)
 		log_error("fdopen()");
 

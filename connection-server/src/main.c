@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon Jan 26 14:13:14 2015
+ * [] Last Modified : Mon Jan 26 20:06:12 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,6 +23,8 @@
 #include "net.h"
 #include "error_functions.h"
 #include "common.h"
+#include "users.h"
+#include "command.h"
 
 static void skeleton_daemon(void);
 
@@ -40,6 +42,8 @@ int main(int argc, char *argv[])
 	int socket_fds[MAX_CONN];
 	int number = 0;
 	int max_socket_fd = server_socket_fd;
+
+	init_user();
 
 	while (1) {
 		int i = 0;
@@ -76,7 +80,7 @@ int main(int argc, char *argv[])
 				printf("%s\n", message.verb);
 				printf("%s\n", message.dest_id);
 				printf("%s\n", message.src_id);
-				//command_dispatcher(socket_fds[i], &message);
+				command_dispatcher(socket_fds[i], &message);
 			}
 		}
 

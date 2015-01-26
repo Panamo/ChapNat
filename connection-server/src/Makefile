@@ -7,7 +7,8 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-OBJ=main.o common.o message.o net.o error_functions.o
+OBJ=main.o common.o message.o net.o error_functions.o \
+    users.o chobj.o command.o
 LIB=glib-2.0
 MLIB=
 
@@ -16,12 +17,15 @@ CFLAGS=-Wall -O0 -g -std=gnu11 \
 LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
 
 Chapat.out: $(OBJ)
-	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LBLIBS)
+	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LDLIBS)
 main.o: common.h net.h message.h
 common.o: common.h
 message.o: message.h
 net.o: net.h common.h message.h error_functions.h
 error_functions.o:
+users.o: message.h users.h net.h
+chobj.o: chobj.h
+command.o: command.h users.h net.h message.h
 
 .PHONY: clean
 clean:
