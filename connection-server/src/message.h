@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat 24 Jan 2015 06:24:57 PM IRST
+ * [] Last Modified : Mon Jan 26 13:12:01 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -39,7 +39,7 @@
 */
 
 struct message {
-	char verb[5];
+	char verb[10];
 	char dest_id[255];
 	char src_id[255];
 	int m_size;
