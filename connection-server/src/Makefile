@@ -16,7 +16,7 @@ CFLAGS=-Wall -O0 -g -std=gnu11 \
 LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
 
 Chapat.out: $(OBJ)
-	gcc $(CFLAGS) -o Chapat.out $(OBJ)
+	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LBLIBS)
 main.o: common.h net.h message.h
 common.o: common.h
 message.o: message.h
@@ -28,7 +28,7 @@ clean:
 	rm Chapat.out $(OBJ)
 .PHONY: install
 install:
-	${MAKE} Chapat.out
+	$(MAKE) Chapat.out
 	cp Chapat.sh /etc/init.d/ChatHub-C
-	cp Chapat /usr/sbin/
+	cp Chapat.out /usr/sbin/
 
