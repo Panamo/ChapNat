@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue 30 Dec 2014 11:31:06 PM IRST
+ * [] Last Modified : Tue 27 Jan 2015 12:23:59 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -15,14 +15,8 @@
 
 void open_log_file();
 
-void terminate();
-
 void log_error(const char* msg);
 
 void log_war(const char* msg);
-
-void error_die(const char* msg);
-
-void use_die(const char* msg);
 
 #endif
