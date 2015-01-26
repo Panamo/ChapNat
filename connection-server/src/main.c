@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sat Jan 24 04:05:22 2015
+ * [] Last Modified : Mon Jan 26 14:13:14 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -73,7 +73,9 @@ int main(int argc, char *argv[])
 				}
 
 				printf("%s\n", message.body);
-
+				printf("%s\n", message.verb);
+				printf("%s\n", message.dest_id);
+				printf("%s\n", message.src_id);
 				//command_dispatcher(socket_fds[i], &message);
 			}
 		}

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun Jan 25 08:32:16 2015
+ * [] Last Modified : Mon Jan 26 14:12:53 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -16,22 +16,10 @@
 #include <stdlib.h>
 
 #include "message.h"
+#include "net.h"
 #include "users.h"
 
 static GHashTable *users;
-
-int main()
-{
-	init_user();
-	struct message *m1 = malloc(sizeof(struct message));
-	strcpy(m1->dest_id, "12345");
-	add_user(m1, 1);
-	free(m1);
-
-	struct message m2;
-	strcpy(m2.dest_id, "12345");
-	snd_user(&m2, 2);
-}
 
 /*
  * @ typedef const void *gconstpointer
@@ -88,7 +76,7 @@ void snd_user(const struct message *message, int socket)
 
 	fd = g_hash_table_lookup(users, message->dest_id);
 	if (fd)
-		printf("%d\n", *fd);
+		send_message(message, *fd);
 	else
 		printf("Not Found\n");
 }

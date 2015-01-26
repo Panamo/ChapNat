@@ -5,17 +5,27 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun Jan 25 08:30:17 2015
+ * [] Last Modified : Mon Jan 26 17:23:20 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
+#ifndef CHOBJ_H
+#define CHOBJ_H
 
 struct chobj {
-	int is_group;
 	char id[255];
-	chobj *next;
+	GSList *child;
 
 	int fd;
 	struct sockaddr_in client_addr;
 };
+
+struct chobj *chobj_new(const char *id, int socket,
+		struct sockaddr_in addr);
+void chobj_add_child(struct chobj *parent,
+		struct chobj *child);
+void chobj_del_child(struct chobj *parent,
+		struct chobj *child);
+
+#endif
