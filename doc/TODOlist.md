@@ -1,7 +1,6 @@
 TODO list
 ==========
 
-
-- [ ] Changing message stuct to dynamic size message struct
-- [ ] Improve coding style and file structuring
-- [ ] Improve loging system
+- [X] Changing message stuct to dynamic size message struct
+- [X] Improve coding style and file structuring
+- [X] Improve loging system

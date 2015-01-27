@@ -6,7 +6,10 @@ Mohammad Reza Mahboubi Ardakani <mrmahboubi95@yahoo.com>
 ##############################################################
 
 connection server:
-port: 13732
+
+chpt/1.1:
+
+port: ?
 
 * message header fields must be separate with ' ', and
   connection created over TCP so field sequence is important.
@@ -36,8 +39,17 @@ port: 13732
   function.
 * every non-standard packet dropped.
 
+=> send: verb = send
+         dest_id = receiver_id
+	 src_id = sender_id
+	 size = ?
+
 => join: verb = join
-         dest_id = group_id
+         dest_id = group_id | client_id
 	 src_id = client_id
 	 size = 0
  * please note that if group_id == client_id, your client will be signed in !! :-)
+
+=> add:
+=> leave:
+=> check:

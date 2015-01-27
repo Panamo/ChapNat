@@ -36,6 +36,3 @@ struct chobj {
  * chobj (Chapat Object) is a most important structure in chapat,
    if is_group field in chobj != 1 then it is a person not group
    so child field must be NULL.
-
- * Please remeber every person can join only in ONE group !!!!
-   if you do not like it, so FIX IT.

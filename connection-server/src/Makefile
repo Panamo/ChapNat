@@ -7,12 +7,15 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-OBJ=main.o common.o message.o net.o error_functions.o \
+OBJ=main.o common.o message.o net.o \
     users.o chobj.o command.o
 LIB=glib-2.0
 MLIB=
 
-CFLAGS=-Wall -O0 -g -std=gnu11 \
+# Remove it when you don't want debug messages.
+DEFINES=-DDEBUG
+
+CFLAGS=-Wall -O0 -g -std=gnu11 $(DEFINES) \
        $(shell pkg-config --cflags $(LIB))
 LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
 
@@ -21,9 +24,8 @@ Chapat.out: $(OBJ)
 main.o: common.h net.h message.h
 common.o: common.h
 message.o: message.h
-net.o: net.h common.h message.h error_functions.h
-error_functions.o:
-users.o: message.h users.h net.h
+net.o: net.h common.h message.h
+users.o: message.h users.h net.h common.h
 chobj.o: chobj.h
 command.o: command.h users.h net.h message.h
 

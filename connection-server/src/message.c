@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon Jan 26 20:45:33 2015
+ * [] Last Modified : Tue Jan 27 18:56:42 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,8 +18,9 @@
 
 int serialize_message(FILE *dest, const struct message *message)
 {
-	int retval = fprintf(dest, "%s %s %s %d\n%s", message->verb, message->dest_id,
-			message->src_id, message->m_size, message->body);
+	int retval = fprintf(dest, "%s %s %s %d\n%s", message->verb,
+			message->dest_id, message->src_id,
+			message->m_size, message->body);
 	fflush(dest);
 	return retval;
 }
@@ -46,7 +47,8 @@ int deserialize_message(FILE *src, struct message *message)
 	message->body = malloc(message->m_size * sizeof(char) + 1);
 	/* Read message body start indicator ('\n') */
 	fgetc(src);
-	retval += fread(message->body, message->m_size, sizeof(char), src);
+	retval += fread(message->body, message->m_size,
+			sizeof(char), src);
 
 	return retval;
 }
