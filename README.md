@@ -2,7 +2,7 @@ Chapat
 ======
 #Introduction
 Chapat(Chapal Application of Telecommunication),is a GapApp application server  
-This projcet written completely by pure C and BSD sockets under linux mint and gcc  
+This project written completely by pure C and BSD sockets under linux mint and gcc  
 In this project we using kernel-coding style from Linus Torvalds and using some
 script from kernel to validate our code against that.  
 This project also worked on Darwin 14.0.0
