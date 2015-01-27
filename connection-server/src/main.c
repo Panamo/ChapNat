@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon Jan 26 20:06:12 2015
+ * [] Last Modified : Tue Jan 27 16:37:00 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -21,12 +21,9 @@
 
 #include "message.h"
 #include "net.h"
-#include "error_functions.h"
 #include "common.h"
 #include "users.h"
 #include "command.h"
-
-static void skeleton_daemon(void);
 
 int main(int argc, char *argv[])
 {
@@ -34,8 +31,6 @@ int main(int argc, char *argv[])
 		udie("usage : server_port_number");
 
 	int server_port_number = atoi(argv[1]);
-
-	//skeleton_daemon();
 
 	int server_socket_fd = net_init(server_port_number);
 
@@ -76,61 +71,13 @@ int main(int argc, char *argv[])
 					continue;
 				}
 
-				printf("%s\n", message.body);
-				printf("%s\n", message.verb);
-				printf("%s\n", message.dest_id);
-				printf("%s\n", message.src_id);
+				ulog("%s\n", message.body);
+				ulog("%s\n", message.verb);
+				ulog("%s\n", message.dest_id);
+				ulog("%s\n", message.src_id);
 				command_dispatcher(socket_fds[i], &message);
 			}
 		}
 
 	}
-
-}
-
-static void skeleton_daemon(void)
-{
-	pid_t pid;
-
-	/* Fork off the parent process */
-	pid = fork();
-
-	/* An error occurred */
-	if (pid < 0)
-		exit(EXIT_FAILURE);
-
-	/* Success: Let the parent terminate */
-	if (pid > 0)
-		exit(EXIT_SUCCESS);
-
-	/* On success: The child process becomes session leader */
-	if (setsid() < 0)
-		exit(EXIT_FAILURE);
-
-	/* Fork off for the second time*/
-	pid = fork();
-
-	/* An error occurred */
-	if (pid < 0)
-		exit(EXIT_FAILURE);
-
-	/* Success: Let the parent terminate */
-	if (pid > 0)
-		exit(EXIT_SUCCESS);
-
-	/* Set new file permissions */
-	umask(0);
-
-	/* Change the working directory to the root directory */
-	/* or another appropriated directory */
-	chdir("/");
-
-	/* Close all open file descriptors */
-	printf("IN CASE OF ERROR KILL PID %ld\n", getpid());
-	int x;
-	for (x = sysconf(_SC_OPEN_MAX); x > 0; x--) {
-		close (x);
-	}
-
-	open_log_file();
 }

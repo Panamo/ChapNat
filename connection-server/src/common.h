@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Sat Jan 24 03:29:57 2015
+ * [] Last Modified : Tue Jan 27 16:23:42 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,5 +18,7 @@
 
 void sdie(const char *fmt, ...);
 void udie(const char *fmt, ...);
+void ulog(const char *fmt, ...);
+void slog(const char *fmt, ...);
 
 #endif

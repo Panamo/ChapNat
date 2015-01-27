@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Mon 26 Jan 2015 10:42:25 PM IRST
+ * [] Last Modified : Tue Jan 27 16:35:44 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,6 +23,7 @@
 #include "net.h"
 #include "users.h"
 #include "chobj.h"
+#include "common.h"
 
 static GHashTable *users;
 
@@ -67,9 +68,9 @@ void add_user(const struct message *message, int socket)
 			&len);
 	new = g_hash_table_lookup(users, message->dest_id);
 	if (new) {
-		printf("Found\n");
+		ulog("Found\n");
 	} else {
-		printf("%s is added\n", message->dest_id);
+		ulog("%s is added\n", message->dest_id);
 		new = chobj_new(message->dest_id,
 				socket, client_addr);
 		g_hash_table_insert(users,
@@ -80,6 +81,7 @@ void add_user(const struct message *message, int socket)
 
 void del_user(const struct message *message, int socket)
 {
+
 }
 
 void snd_user(const struct message *message, int socket)
@@ -88,9 +90,9 @@ void snd_user(const struct message *message, int socket)
 
 	new = g_hash_table_lookup(users, message->dest_id);
 	if (new) {
-		printf("sned to %s\n", new->id);
+		ulog("sned to %s\n", new->id);
 		send_message(message, new->fd);
 	} else {
-		printf("Not Found\n");
+		ulog("Not Found\n");
 	}
 }

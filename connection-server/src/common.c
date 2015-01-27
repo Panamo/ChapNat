@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Wed 31 Dec 2014 05:15:14 PM IRST
+ * [] Last Modified : Tue Jan 27 16:34:46 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -46,4 +46,42 @@ void udie(const char *fmt, ...)
 
 	fputs(buf, stderr);
 	exit(EXIT_FAILURE);
+}
+
+void slog(const char *fmt, ...)
+{
+#ifdef DEBUG
+	printf("DEBUG: ");
+	fflush(stdout);
+
+	char buf[MAX_BUFF];
+	va_list args;
+
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
+
+	perror(buf);
+#endif
+}
+
+void ulog(const char *fmt, ...)
+{
+#ifdef DEBUG
+	printf("DEBUG: ");
+	fflush(stdout);
+
+	char buf[MAX_BUFF];
+	va_list args;
+
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
+
+	int len = strlen(buf);
+	buf[len] = '\n';
+	buf[len + 1] = 0;
+
+	fputs(buf, stderr);
+#endif
 }

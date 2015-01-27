@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon Jan 26 20:43:43 2015
+ * [] Last Modified : Tue Jan 27 16:32:00 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -20,7 +20,6 @@
 #include "message.h"
 #include "net.h"
 #include "common.h"
-#include "error_functions.h"
 
 static int server_socket_fd;
 
@@ -56,7 +55,7 @@ int send_message(const struct message *message, int socket_fd)
 	FILE *socket_file = fdopen(socket_fd, "r+");
 
 	if (socket_file == NULL)
-		log_error("fdopen()");
+		slog("fdopen()");
 
 	return serialize_message(socket_file, message);
 }
@@ -66,7 +65,7 @@ int recv_message(struct message *message, int socket_fd)
 	FILE *socket_file = fdopen(socket_fd, "r+");
 
 	if (socket_file == NULL)
-		log_error("fdopen()");
+		slog("fdopen()");
 
 	return deserialize_message(socket_file, message);
 }
