@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue Jan 27 16:45:00 2015
+ * [] Last Modified : Tue Jan 27 18:59:50 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -47,11 +47,13 @@ int main(int argc, char *argv[])
 		for (i = 0; i < number; i++)
 			FD_SET(socket_fds[i], &socket_fds_set);
 
-		if (select(max_socket_fd + 1, &socket_fds_set, NULL, NULL, NULL) < 0)
+		if (select(max_socket_fd + 1, &socket_fds_set,
+					NULL, NULL, NULL) < 0)
 			sdie("select");
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
 			int fd = accept_connection();
+
 			socket_fds[number] = fd;
 			number++;
 			if (max_socket_fd < fd)
@@ -60,11 +62,14 @@ int main(int argc, char *argv[])
 		for (i = 0; i < number; i++) {
 			if (FD_ISSET(socket_fds[i], &socket_fds_set)) {
 				struct message message;
-				if (recv_message(&message, socket_fds[i]) <= 0) {
+
+				if (recv_message(&message,
+							socket_fds[i]) <= 0) {
 					close(socket_fds[i]);
 					number--;
 					if (number > 0)
-						socket_fds[i] = socket_fds[number];
+						socket_fds[i] =
+							socket_fds[number];
 					continue;
 				}
 
@@ -75,6 +80,5 @@ int main(int argc, char *argv[])
 				command_dispatcher(socket_fds[i], &message);
 			}
 		}
-
 	}
 }

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Tue Jan 27 16:34:46 2015
+ * [] Last Modified : Tue Jan 27 18:55:07 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -41,6 +41,7 @@ void udie(const char *fmt, ...)
 	va_end(args);
 
 	int len = strlen(buf);
+
 	buf[len] = '\n';
 	buf[len + 1] = 0;
 
@@ -79,6 +80,7 @@ void ulog(const char *fmt, ...)
 	va_end(args);
 
 	int len = strlen(buf);
+
 	buf[len] = '\n';
 	buf[len + 1] = 0;
 
