@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue Jan 27 16:37:00 2015
+ * [] Last Modified : Tue Jan 27 16:45:00 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -31,9 +31,7 @@ int main(int argc, char *argv[])
 		udie("usage : server_port_number");
 
 	int server_port_number = atoi(argv[1]);
-
 	int server_socket_fd = net_init(server_port_number);
-
 	int socket_fds[MAX_CONN];
 	int number = 0;
 	int max_socket_fd = server_socket_fd;
@@ -42,13 +40,12 @@ int main(int argc, char *argv[])
 
 	while (1) {
 		int i = 0;
-
 		fd_set socket_fds_set;
+
 		FD_ZERO(&socket_fds_set);
 		FD_SET(server_socket_fd, &socket_fds_set);
-		for (i = 0; i < number; i++) {
+		for (i = 0; i < number; i++)
 			FD_SET(socket_fds[i], &socket_fds_set);
-		}
 
 		if (select(max_socket_fd + 1, &socket_fds_set, NULL, NULL, NULL) < 0)
 			sdie("select");
@@ -71,10 +68,10 @@ int main(int argc, char *argv[])
 					continue;
 				}
 
-				ulog("%s\n", message.body);
-				ulog("%s\n", message.verb);
-				ulog("%s\n", message.dest_id);
-				ulog("%s\n", message.src_id);
+				ulog("Message body: %s\n", message.body);
+				ulog("Message verb: %s\n", message.verb);
+				ulog("Message dest: %s\n", message.dest_id);
+				ulog("Message src : %s\n", message.src_id);
 				command_dispatcher(socket_fds[i], &message);
 			}
 		}
