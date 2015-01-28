@@ -16,6 +16,9 @@ For more information see doc/protocol.txt
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
 Our coding style based on kernel standard.
 
+#Dependencies
+1. [GLib 2.42.1](https://developer.gnome.org/glib/2.42/)
+
 #Installation
 Going to src folder and execute following command
 
