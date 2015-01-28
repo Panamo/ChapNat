@@ -21,7 +21,7 @@ LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
 
 Chapat.out: $(OBJ)
 	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LDLIBS)
-main.o: common.h net.h message.h
+main.o: common.h net.h message.h sockets.h
 common.o: common.h
 message.o: message.h common.h
 net.o: net.h common.h message.h

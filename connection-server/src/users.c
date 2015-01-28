@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Wed Jan 28 14:47:11 2015
+ * [] Last Modified : Wed Jan 28 15:35:21 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -79,9 +79,9 @@ void add_user(const struct message *message, int socket)
 	}
 }
 
-void del_user(const struct message *message, int socket)
+void del_user(const char *id)
 {
-
+	g_hash_table_remove(users, id);
 }
 
 void snd_user(const struct message *message, int socket)

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 28-01-2015
  *
- * [] Last Modified : Wed Jan 28 15:20:52 2015
+ * [] Last Modified : Wed Jan 28 15:39:45 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,6 +14,8 @@
 
 #include "sockets.h"
 
+GSList *socket_fds;
+
 void add_socket(int *fd)
 {
 	socket_fds = g_slist_append(socket_fds, fd);
@@ -21,6 +23,7 @@ void add_socket(int *fd)
 
 void del_socket(int *fd)
 {
+	
 	socket_fds = g_slist_remove(socket_fds, fd);
 }
 
