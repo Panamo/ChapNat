@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 15:36:22 2015
+ * [] Last Modified : Wed Jan 28 15:57:32 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 
 				if (recv_message(&message,
 							*get_socket(i)) <= 0) {
+					ulog("%d socket errored\n", *get_socket(i));
 					close(*get_socket(i));
 					del_socket(get_socket(i));
 				}
