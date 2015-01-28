@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-01-2015
  *
- * [] Last Modified : Mon Jan 26 20:13:12 2015
+ * [] Last Modified : Wed Jan 28 15:27:27 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -19,6 +19,7 @@
 #include <sys/types.h>
 
 #include "chobj.h"
+#include "sockets.h"
 
 struct chobj *chobj_new(const char *id, int socket,
 		struct sockaddr_in addr)
@@ -29,6 +30,9 @@ struct chobj *chobj_new(const char *id, int socket,
 	new->fd = socket;
 	strcpy(new->id, id);
 	new->client_addr = addr;
+
+	add_socket(&new->fd);
+
 	return new;
 }
 

@@ -8,7 +8,7 @@
 # =======================================
 
 OBJ=main.o common.o message.o net.o \
-    users.o chobj.o command.o
+    users.o chobj.o command.o sockets.o
 LIB=glib-2.0
 MLIB=
 
@@ -28,6 +28,7 @@ net.o: net.h common.h message.h
 users.o: message.h users.h net.h common.h
 chobj.o: chobj.h
 command.o: command.h users.h net.h message.h
+sockets.o: sockets.h
 
 .PHONY: clean
 clean:

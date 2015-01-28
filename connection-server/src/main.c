@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue Jan 27 18:59:50 2015
+ * [] Last Modified : Wed Jan 28 15:25:20 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,6 +24,7 @@
 #include "common.h"
 #include "users.h"
 #include "command.h"
+#include "sockets.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +33,6 @@ int main(int argc, char *argv[])
 
 	int server_port_number = atoi(argv[1]);
 	int server_socket_fd = net_init(server_port_number);
-	int socket_fds[MAX_CONN];
-	int number = 0;
 	int max_socket_fd = server_socket_fd;
 
 	init_user();
@@ -44,8 +43,8 @@ int main(int argc, char *argv[])
 
 		FD_ZERO(&socket_fds_set);
 		FD_SET(server_socket_fd, &socket_fds_set);
-		for (i = 0; i < number; i++)
-			FD_SET(socket_fds[i], &socket_fds_set);
+		for (i = 0; i < get_socket_size(); i++)
+			FD_SET(*get_socket(i), &socket_fds_set);
 
 		if (select(max_socket_fd + 1, &socket_fds_set,
 					NULL, NULL, NULL) < 0)
@@ -53,31 +52,31 @@ int main(int argc, char *argv[])
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
 			int fd = accept_connection();
+			struct message message;
+			if (recv_message(&message, fd) <= 0)
+					close(fd);
+			ulog("Message body: %s\n", message.body);
+			ulog("Message verb: %s\n", message.verb);
+			ulog("Message dest: %s\n", message.dest_id);
+			ulog("Message src : %s\n", message.src_id);
+			command_dispatcher(fd, &message);
 
-			socket_fds[number] = fd;
-			number++;
-			if (max_socket_fd < fd)
-				max_socket_fd = fd;
 		}
-		for (i = 0; i < number; i++) {
-			if (FD_ISSET(socket_fds[i], &socket_fds_set)) {
+		for (i = 0; i < get_socket_size(); i++) {
+			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {
 				struct message message;
 
 				if (recv_message(&message,
-							socket_fds[i]) <= 0) {
-					close(socket_fds[i]);
-					number--;
-					if (number > 0)
-						socket_fds[i] =
-							socket_fds[number];
-					continue;
+							*get_socket(i)) <= 0) {
+					close(*get_socket(i));
+					del_socket(get_socket(i));
 				}
 
 				ulog("Message body: %s\n", message.body);
 				ulog("Message verb: %s\n", message.verb);
 				ulog("Message dest: %s\n", message.dest_id);
 				ulog("Message src : %s\n", message.src_id);
-				command_dispatcher(socket_fds[i], &message);
+				command_dispatcher(*get_socket(i), &message);
 			}
 		}
 	}
