@@ -19,6 +19,7 @@ port: ?
 @ verb: send / join (add yourself into group)
 	/ add (add somebody else into group)
         / leave / check (who is online?)
+	/ signin
 
 @ dest_id: It can be both group or a single destination client UUID
 
@@ -44,11 +45,10 @@ port: ?
 	 src_id = sender_id
 	 size = ?
 
-=> join: verb = join
-         dest_id = group_id | client_id
+=> signin: verb = signin
+         dest_id = client_id
 	 src_id = client_id
-	 size = 0
- * please note that if group_id == client_id, your client will be signed in !! :-)
+	 size = ?
 
 => add:
 => leave:
