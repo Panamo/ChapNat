@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 14:49:18 2015
+ * [] Last Modified : Wed Jan 28 17:28:05 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,6 +22,8 @@ int serialize_message(FILE *dest, const struct message *message)
 	int retval = fprintf(dest, "%s %s %s %d\n%s", message->verb,
 			message->dest_id, message->src_id,
 			message->m_size, message->body);
+	if (retval < 0)
+		sdie("Socket:");
 	ulog("%s %s %s %d\n%s", message->verb,
 			message->dest_id, message->src_id,
 			message->m_size, message->body);

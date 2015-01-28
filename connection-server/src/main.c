@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 17:19:57 2015
+ * [] Last Modified : Wed Jan 28 17:30:15 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -79,13 +79,13 @@ int main(int argc, char *argv[])
 					ulog("%d socket errored\n", *get_socket(i));
 					close(*get_socket(i));
 					del_socket(get_socket(i));
+				} else {
+					ulog("Message body: %s\n", message.body);
+					ulog("Message verb: %s\n", message.verb);
+					ulog("Message dest: %s\n", message.dest_id);
+					ulog("Message src : %s\n", message.src_id);
+					command_dispatcher(*get_socket(i), &message);
 				}
-
-				ulog("Message body: %s\n", message.body);
-				ulog("Message verb: %s\n", message.verb);
-				ulog("Message dest: %s\n", message.dest_id);
-				ulog("Message src : %s\n", message.src_id);
-				command_dispatcher(*get_socket(i), &message);
 			}
 		}
 	}
