@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 17:30:15 2015
+ * [] Last Modified : Wed 28 Jan 2015 08:28:01 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -73,6 +73,9 @@ int main(int argc, char *argv[])
 		for (i = 0; i < get_socket_size(); i++) {
 			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {
 				struct message message;
+
+				/* initiate message struct for when errors occurred ... */
+				memset(&message, 0, sizeof(message));
 				
 				if (recv_message(&message,
 							*get_socket(i)) <= 0) {
