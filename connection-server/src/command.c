@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue Jan 27 16:36:19 2015
+ * [] Last Modified : Wed Jan 28 14:21:10 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,7 +18,7 @@
 #include "command.h"
 #include "net.h"
 
-void join_command(const struct message *message, int socket_fd)
+void signin_command(const struct message *message, int socket_fd)
 {
 	add_user(message, socket_fd);
 }
@@ -38,8 +38,8 @@ void check_command(const struct message *message, int socket_fd)
 
 void command_dispatcher(int socket_fd, const struct message *message)
 {
-	if (!strcmp(message->verb, "join"))
-		join_command(message, socket_fd);
+	if (!strcmp(message->verb, "signin"))
+		signin_command(message, socket_fd);
 	else if (!strcmp(message->verb, "leave"))
 		leave_command(message, socket_fd);
 	else if (!strcmp(message->verb, "send"))

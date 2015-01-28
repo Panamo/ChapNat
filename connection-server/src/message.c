@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Tue Jan 27 18:56:42 2015
+ * [] Last Modified : Wed Jan 28 14:49:18 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,11 +14,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "common.h"
 #include "message.h"
 
 int serialize_message(FILE *dest, const struct message *message)
 {
 	int retval = fprintf(dest, "%s %s %s %d\n%s", message->verb,
+			message->dest_id, message->src_id,
+			message->m_size, message->body);
+	ulog("%s %s %s %d\n%s", message->verb,
 			message->dest_id, message->src_id,
 			message->m_size, message->body);
 	fflush(dest);

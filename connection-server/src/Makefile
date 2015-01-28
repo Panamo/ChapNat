@@ -23,7 +23,7 @@ Chapat.out: $(OBJ)
 	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LDLIBS)
 main.o: common.h net.h message.h
 common.o: common.h
-message.o: message.h
+message.o: message.h common.h
 net.o: net.h common.h message.h
 users.o: message.h users.h net.h common.h
 chobj.o: chobj.h
