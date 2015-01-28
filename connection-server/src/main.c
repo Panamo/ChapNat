@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 15:57:32 2015
+ * [] Last Modified : Wed Jan 28 17:19:57 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -53,20 +53,27 @@ int main(int argc, char *argv[])
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
 			int fd = accept_connection();
+			
+			max_socket_fd = (max_socket_fd < fd) ? fd :
+				max_socket_fd;
+
 			struct message message;
+			
 			if (recv_message(&message, fd) <= 0)
 					close(fd);
+			
 			ulog("Message body: %s\n", message.body);
 			ulog("Message verb: %s\n", message.verb);
 			ulog("Message dest: %s\n", message.dest_id);
 			ulog("Message src : %s\n", message.src_id);
+			
 			command_dispatcher(fd, &message);
 
 		}
 		for (i = 0; i < get_socket_size(); i++) {
 			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {
 				struct message message;
-
+				
 				if (recv_message(&message,
 							*get_socket(i)) <= 0) {
 					ulog("%d socket errored\n", *get_socket(i));

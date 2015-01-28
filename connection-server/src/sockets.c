@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 28-01-2015
  *
- * [] Last Modified : Wed Jan 28 15:55:33 2015
+ * [] Last Modified : Wed Jan 28 17:12:17 2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -28,6 +28,7 @@ GSList *socket_fds;
 
 void add_socket(int *fd)
 {
+	ulog("socket %d is added.\n", *fd);
 	socket_fds = g_slist_append(socket_fds, fd);
 }
 
