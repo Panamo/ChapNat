@@ -27,9 +27,9 @@ port: ?
 
 @ size: sizeof message body in bytes
 
- +------------+--------------------------+------------+
+ +------------+-------------+------------+------------+
  |    verb    |   dest_id   |   src_id   |     size   |
- +------------+--------------------------+------------+
+ +------------+-------------+------------+------------+
  |                                                    |
  |                  Message Body                      |
  |                                                    |
@@ -50,6 +50,35 @@ port: ?
 	 src_id = client_id
 	 size = ?
 
-=> add:
+=> add: verb = add
+		dest_id = group_id
+		src_id = sender_id
+		
+=> invite: verb = add
+		dest_id = group_id
+		src_id = sender_id
+		body = toBeAdded_id
+		
 => leave:
+		verb = leave
+		dest_id = group_id
+		src_id = sender_id
+		
 => check:
+
+
+
+=> message_statuses:
+		verb = delivered/sent
+		dest_id = group/client_id
+		src_id = sender_id
+		body = message_id = ?
+		
+=> new_group:
+		verb = new_group(or something else!!??)
+		dest_id = (someone should generate group_id -> client or server)
+		src_id = admin=group maker = sender_id
+=> block: (no more messages can be sent between these to clients)
+		verb = block
+		dest_id = client_id (toBeBlocked)
+		src_id = sender_id
