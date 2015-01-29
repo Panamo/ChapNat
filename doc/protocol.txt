@@ -9,7 +9,7 @@ connection server:
 
 chpt/1.1:
 
-port: ?
+port: 1373
 
 * message header fields must be separate with ' ', and
   connection created over TCP so field sequence is important.
@@ -19,7 +19,8 @@ port: ?
 @ verb: send / join (add yourself into group)
 	/ add (add somebody else into group)
         / leave / check (who is online?)
-	/ signin
+	/ signin / invite / block
+	/ new_group / delivered / sent
 
 @ dest_id: It can be both group or a single destination client UUID
 
@@ -38,7 +39,9 @@ port: ?
 * other options can add without so much difficulty in this
   protocol with add field in message header and change serialize
   function.
-* every non-standard packet dropped.
+* every non-standard packet dropped.(But not now .... maybe later ha ha ha)
+* when clients goes into block mode no more messages can be sent between
+  these to clients
 
 => send:	verb = send
         	dest_id = receiver_id
@@ -65,16 +68,15 @@ port: ?
 		
 => check:
 
-=> message_statuses:	verb = delivered/sent
+=> delivered/sent:	verb = delivered/sent
 			dest_id = group/client_id
 			src_id = sender_id
 			body = message_id = ?
 		
-=> new_group:	verb = new_group(or something else!!??)
+=> new_group:	verb = new_group
 		dest_id = (someone should generate group_id -> client or server)
 		src_id = admin=group maker = sender_id
 
-=> block:	(no more messages can be sent between these to clients)
-		verb = block
-		dest_id = client_id (toBeBlocked)
-		src_id = sender_id
+=> block:	verb = block
+		dest_id = blocked_id
+		src_id = blocker_id
