@@ -27,10 +27,11 @@ Chapat Object:
 			      |------|  |------|
 			      |client|->|client|...
 			      |------|  |------|
+GSList : Gnome Single Linked List
 struct chobj {
 	char id[255];
 	GSList child;
-	... (Techninal fields used only in networking)
+	... (Techninal fields used only in networking phase)
 }
 
  * chobj (Chapat Object) is a most important structure in chapat,

@@ -20,7 +20,7 @@ CFLAGS=-Wall -O0 -g -std=gnu11 $(DEFINES) \
 LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
 
 Chapat.out: $(OBJ)
-	gcc $(CFLAGS) -o Chapat.out $(OBJ) $(LDLIBS)
+	$(CC) $(CFLAGS) -o Chapat.out $(OBJ) $(LDLIBS)
 main.o: common.h net.h message.h sockets.h
 common.o: common.h
 message.o: message.h common.h

@@ -13,7 +13,7 @@ port: 1373
 
 * message header fields must be separate with ' ', and
   connection created over TCP so field sequence is important.
-  after message header there is just ONE '\n' and then message
+  after message header there is just "ONE" '\n' and then message
   body come.
 
 @ verb: send / join (add yourself into group)
@@ -37,11 +37,13 @@ port: 1373
  +----------------------------------------------------+
 
 * other options can add without so much difficulty in this
-  protocol with add field in message header and change serialize
+  protocol, just with add field in message header and change serialize
   function.
 * every non-standard packet dropped.(But not now .... maybe later ha ha ha)
 * when clients goes into block mode no more messages can be sent between
-  these to clients
+  these to clients (see blow for more information)
+* for now i think we must use sigin message body for sending user data into
+  database but this may change in future.
 
 => send:	verb = send
         	dest_id = receiver_id
