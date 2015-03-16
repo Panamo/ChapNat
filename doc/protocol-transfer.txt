@@ -29,7 +29,7 @@ port: 1373
 @ size: sizeof message body in bytes
 
  +------------+-------------+------------+------------+
- |    verb    |   dest_id   |   src_id   |     size   |
+ |    verb    |   dest_id   |   src_id   |    size    |
  +------------+-------------+------------+------------+
  |                                                    |
  |                  Message Body                      |
