@@ -5,19 +5,16 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon 16 Mar 2015 05:26:37 PM IRST
+ * [] Last Modified : Wed 18 Mar 2015 12:31:32 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
-#include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <syslog.h>
 #include <string.h>
 
 #include "message.h"

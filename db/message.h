@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Mon Jan 26 13:12:01 2015
+ * [] Last Modified : Wed 18 Mar 2015 12:34:48 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -30,7 +30,7 @@
  * @size: sizeof message body in bytes
  *
  * +------------+--------------------------+------------+
- * |    verb    |   dest_id  |    src_id   |    size    |
+ * |    verb    |   user_id  |     pass    |    size    |
  * +------------+--------------------------+------------+
  * |                                                    |
  * |                  Message Body                      |
