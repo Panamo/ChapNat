@@ -1,0 +1,65 @@
+In The Name Of God
+
+Parham Alvani <parham.alvani@gmail.com>
+Mohammad Reza Mahboubi Ardakani <mrmahboubi@gmail.com>
+Navid Masheyekhi <navidmsk@gmail.com>
+
+##############################################################
+
+connection server:
+
+chpt/1.2:
+
+port: 1373
+
+* message header fields must be separate with ' ', and
+  connection created over TCP so field sequence is important.
+  after message header there is just "ONE" '\n' and then message
+  body come.
+
+@ verb:
+  / send / join (add yourself into group) /
+	/ add (add somebody else into group) /
+  / leave / check (who is online ?) /
+	/ invite / new_group / delivered / sent /
+
+@ dest_id: It can be both group or a single destination client UUID
+
+@ src_id: single source client UUID
+
+@ size: sizeof message body in bytes
+
+ +------------+-------------+------------+------------+
+ |    verb    |   dest_id   |   src_id   |    size    |
+ +------------+-------------+------------+------------+
+ |            |             |            |            |
+ +------------+-------------+------------+------------+
+ |                                                    |
+ |                  Message Body                      |
+ |                                                    |
+ +----------------------------------------------------+
+
+* other options can add without so much difficulty in this
+  protocol, just with add field in message header and change serialize
+  function.
+* every non-standard packet dropped.(But not now .... maybe later [ha ha ha])
+* when clients goes into block mode no more messages can be sent between
+  these to clients (see blow for more information)[ha ha ha]
+
+=> send:
+  verb = send
+  dest_id = receiver_id
+  src_id = sender_id
+  size = ?
+
+=> get-picture:
+  verb = getP
+  dest_id = ?
+  src_id = ?
+  size = ?
+
+=> join: 
+  verb = join
+  dest_id = ?
+  src_id = ?
+  size = ?
