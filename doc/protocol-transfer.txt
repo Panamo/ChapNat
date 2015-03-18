@@ -1,13 +1,15 @@
+
 In The Name Of God
 
 Parham Alvani <parham.alvani@gmail.com>
-Mohammad Reza Mahboubi Ardakani <mrmahboubi95@yahoo.com>
+Mohammad Reza Mahboubi Ardakani <mrmahboubi@gmail.com>
+Navid Masheyekhi <navidmsk@gmail.com>
 
 ##############################################################
 
 connection server:
 
-chpt/1.1:
+chpt/1.2:
 
 port: 1373
 
@@ -16,11 +18,12 @@ port: 1373
   after message header there is just "ONE" '\n' and then message
   body come.
 
-@ verb: send / join (add yourself into group)
-	/ add (add somebody else into group)
-        / leave / check (who is online?)
-	/ signin / invite / block
-	/ new_group / delivered / sent
+@ verb:
+  / send / join (add yourself into group) /
+	/ add (add somebody else into group) /
+  / leave / check (who is online ?) /
+	/ invite / block /
+	/ new_group / delivered / sent /
 
 @ dest_id: It can be both group or a single destination client UUID
 
@@ -31,6 +34,8 @@ port: 1373
  +------------+-------------+------------+------------+
  |    verb    |   dest_id   |   src_id   |    size    |
  +------------+-------------+------------+------------+
+ |            |             |            |            |
+ +------------+-------------+------------+------------+
  |                                                    |
  |                  Message Body                      |
  |                                                    |
@@ -39,46 +44,24 @@ port: 1373
 * other options can add without so much difficulty in this
   protocol, just with add field in message header and change serialize
   function.
-* every non-standard packet dropped.(But not now .... maybe later ha ha ha)
+* every non-standard packet dropped.(But not now .... maybe later [ha ha ha])
 * when clients goes into block mode no more messages can be sent between
-  these to clients (see blow for more information)
-* for now i think we must use sigin message body for sending user data into
-  database but this may change in future.
+  these to clients (see blow for more information)[ha ha ha]
 
-=> send:	verb = send
-        	dest_id = receiver_id
-		src_id = sender_id
-		size = ?
+=> send:
+  verb = send
+  dest_id = receiver_id
+  src_id = sender_id
+  size = ?
 
-=> signin:	verb = signin
-		dest_id = client_id
-		src_id = client_id
-		size = ?
+=> get-picture:
+  verb = getP
+  dest_id = ?
+  src_id = ?
+  size = ?
 
-=> add:		verb = add
-		dest_id = group_id
-		src_id = sender_id
-		
-=> invite:	verb = add
-		dest_id = group_id
-		src_id = sender_id
-		body = toBeAdded_id
-		
-=> leave:	verb = leave
-		dest_id = group_id
-		src_id = sender_id
-		
-=> check:
-
-=> delivered/sent:	verb = delivered/sent
-			dest_id = group/client_id
-			src_id = sender_id
-			body = message_id = ?
-		
-=> new_group:	verb = new_group
-		dest_id = (someone should generate group_id -> client or server)
-		src_id = admin=group maker = sender_id
-
-=> block:	verb = block
-		dest_id = blocked_id
-		src_id = blocker_id
+=> join: 
+  verb = join
+  dest_id = ?
+  src_id = ?
+  size = ?
