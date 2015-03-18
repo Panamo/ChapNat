@@ -1,0 +1,81 @@
+In The Name Of God
+
+Parham Alvani <parham.alvani@gmail.com>
+Mohammad Reza Mahboubi Ardakani <mrmahboubi95@yahoo.com>
+
+##############################################################
+
+db server:
+
+chptd/1.1:
+
+port: 1373
+TCP
+
+* message header fields must be separate with ' ', and
+  connection created over TCP so field sequence is important.
+
+@ verb: send / join (add yourself into group)
+	/ add (add somebody else into group)
+        / leave / check (who is online?)
+	/ signin / invite / block
+	/ new_group / delivered / sent
+
+@ user_id: UUID or username or ... of the user (ha ha ha)
+
+@ size: sizeof message body in bytes
+
+ +------------+-------------+------------+------------+
+ |    verb    |   user_id   |    pass    |    size    |
+ +------------+-------------+------------+------------+
+ |                                                    |
+ |                  Message Body                      |
+ |                                                    |
+ +----------------------------------------------------+
+
+* other options can add without so much difficulty in this
+  protocol, just with add field in message header and change serialize
+  function.
+* every non-standard packet dropped.(But not now .... maybe later ha ha ha)
+* when clients goes into block mode no more messages can be sent between
+  these to clients (see blow for more information)
+* for now i think we must use sigin message body for sending user data into
+  database but this may change in future.
+
+=> send:	verb = send
+        	dest_id = receiver_id
+		src_id = sender_id
+		size = ?
+
+=> signin:	verb = signin
+		dest_id = client_id
+		src_id = client_id
+		size = ?
+
+=> add:		verb = add
+		dest_id = group_id
+		src_id = sender_id
+		
+=> invite:	verb = add
+		dest_id = group_id
+		src_id = sender_id
+		body = toBeAdded_id
+		
+=> leave:	verb = leave
+		dest_id = group_id
+		src_id = sender_id
+		
+=> check:
+
+=> delivered/sent:	verb = delivered/sent
+			dest_id = group/client_id
+			src_id = sender_id
+			body = message_id = ?
+		
+=> new_group:	verb = new_group
+		dest_id = (someone should generate group_id -> client or server)
+		src_id = admin=group maker = sender_id
+
+=> block:	verb = block
+		dest_id = blocked_id
+		src_id = blocker_id
