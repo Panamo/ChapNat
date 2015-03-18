@@ -40,3 +40,9 @@ TCP
 	user_id = ?
 	pass = password
 	user = username
+
+=> sign-up:
+	verb = sgup
+	user_id = ?
+	pass = password
+	user = username

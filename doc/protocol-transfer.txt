@@ -20,7 +20,7 @@ port: 1373
 @ verb:
   / send / join (add yourself into group) /
 	/ add (add somebody else into group) /
-  / leave / check (who is online ?) /
+  / leave / chon (who is online ?) /
 	/ invite / new_group / delivered / sent /
 
 @ dest_id: It can be both group or a single destination client UUID
@@ -31,8 +31,6 @@ port: 1373
 
  +------------+-------------+------------+------------+
  |    verb    |   dest_id   |   src_id   |    size    |
- +------------+-------------+------------+------------+
- |            |             |            |            |
  +------------+-------------+------------+------------+
  |                                                    |
  |                  Message Body                      |
@@ -60,6 +58,12 @@ port: 1373
 
 => join: 
   verb = join
+  dest_id = ?
+  src_id = ?
+  size = ?
+
+=> check:
+  verb = chon
   dest_id = ?
   src_id = ?
   size = ?
