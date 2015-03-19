@@ -7,8 +7,8 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-P=
-OBJ=
+P=Chapat-db
+OBJ=main.o common.o command.o net.o message.o
 LIB=
 MLIB=
 
@@ -23,6 +23,12 @@ endif
 ASFLAGS=-Wall -O0 -g
 
 $(P): $(OBJ)
+	$(CC) -o $(P) $(OBJ) $(LDLIBS)
+main.o:
+common.o: common.h
+command.o: command.h
+net.o: net.h
+message.o: message.h
 
 .PHONY: clean
 clean:
