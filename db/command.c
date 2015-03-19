@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed 18 Mar 2015 12:33:12 AM IRST
+ * [] Last Modified : Thu 19 Mar 2015 08:14:23 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,14 +14,27 @@
 #include <stdio.h>
 
 #include "message.h"
-#include "users.h"
 #include "command.h"
 #include "net.h"
 
+void sgin_command(const struct message *message, int socket_fd)
+{
+}
+
+void sgup_command(const struct message *message, int socket_fd)
+{
+}
+
+void newg_command(const struct message *message, int socket_fd)
+{
+}
+
 void command_dispatcher(int socket_fd, const struct message *message)
 {
-	if (!strcmp(message->verb, "signin"))
-	else if (!strcmp(message->verb, "leave"))
-	else if (!strcmp(message->verb, "send"))
-	else if (!strcmp(message->verb, "check"))
+	if (!strcmp(message->verb, "sgnin"))
+		sgin_command(message, socket_fd);
+	else if (!strcmp(message->verb, "sgup"))
+		sgup_command(message, socket_fd);
+	else if (!strcmp(message->verb, "newg"))
+		newg_command(message, socket_fd);
 }
