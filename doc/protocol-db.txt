@@ -14,7 +14,11 @@ TCP
 * message header fields must be separate with ' ', and
   connection created over TCP so field sequence is important.
 
-@ verb: newg / sgin / sgup / 
+@ verb: newg / sgin / sgup /
+@ status codes: st00 st01 st10 st11
+
+* status codes added instead of verb in response messages from
+  server.
 
 @ user_id: UUID or username or ... of the user (ha ha ha)
 
@@ -40,3 +44,28 @@ TCP
 	user_id = ?
 	pass = password
 	user = username
+
+=> sign-in successfull:
+	verb = st00
+	user_id = user ID in database
+	pass = ?
+	user = ?
+
+=> sign-in un-successfull:
+	verb = st01
+	user_id = WTF
+	pass = ?
+	user = ?
+
+=> sign-up successfull:
+	verb = st10
+	user_id = user ID in database
+	pass = ?
+	user = ?
+
+=> sign-up un-successfull:
+	verb = st11
+	user_id = WTF
+	pass = ?
+	user = ?
+
