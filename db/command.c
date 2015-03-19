@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Thu 19 Mar 2015 08:14:23 PM IRST
+ * [] Last Modified : Fri 20 Mar 2015 12:17:29 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -16,6 +16,7 @@
 #include "message.h"
 #include "command.h"
 #include "net.h"
+#include "users.h"
 
 void sgin_command(const struct message *message, int socket_fd)
 {
@@ -23,6 +24,7 @@ void sgin_command(const struct message *message, int socket_fd)
 
 void sgup_command(const struct message *message, int socket_fd)
 {
+	add_user(message, socket_fd);
 }
 
 void newg_command(const struct message *message, int socket_fd)

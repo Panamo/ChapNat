@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Thu 19 Mar 2015 11:50:18 AM IRST
+ * [] Last Modified : Fri 20 Mar 2015 12:16:02 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -51,6 +51,9 @@ int deserialize_message(FILE *src, struct message *message)
 		return -1;
 	retval += strlen(message->user);
 
-	
+	ulog("%s %s %s %s", message->verb,
+			message->user_id, message->pass,
+			message->user);
+
 	return retval;
 }

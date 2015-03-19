@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Thu 19 Mar 2015 11:25:43 PM IRST
+ * [] Last Modified : Fri 20 Mar 2015 12:15:24 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		udie("usage : server_port_number");
 
 	int server_port_number = atoi(argv[1]);
-	int server_socket_fd = net_init(server_port_number);
+	net_init(server_port_number);
 
 	while (1) {
 		int fd;
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		fd = accept_connection();
 		if (recv_message(&message, fd) <= 0)
 			close(fd);
-			
+		
 		command_dispatcher(fd, &message);
 		close(fd);
 	}

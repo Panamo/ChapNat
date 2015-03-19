@@ -8,7 +8,8 @@
 # =======================================
 
 P=Chapat-db
-OBJ=main.o common.o command.o net.o message.o
+OBJ=main.o common.o command.o net.o message.o users.o \
+    asprintf.o
 LIB=
 MLIB=
 
@@ -21,14 +22,17 @@ CFLAGS=-Wall -O0 -g -std=gnu11
 LDLIBS=$(MLIB)
 endif
 ASFLAGS=-Wall -O0 -g
+CFLAGS+=-DDEBUG
 
 $(P): $(OBJ)
 	$(CC) -o $(P) $(OBJ) $(LDLIBS)
 main.o:
 common.o: common.h
-command.o: command.h
+command.o: command.h users.h
 net.o: net.h
 message.o: message.h
+users.o: users.h
+asprintf.o: asprintf.h
 
 .PHONY: clean
 clean:
