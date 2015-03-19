@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Fri 20 Mar 2015 12:20:50 AM IRST
+ * [] Last Modified : Fri 20 Mar 2015 12:26:02 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <openssl/sha.h>
 
 #include "message.h"
 #include "net.h"
@@ -24,8 +25,11 @@ void add_user(const struct message *message, int socket)
 {
 	struct message replay;
 	char *query;
+  	unsigned char hashpas[SHA_DIGEST_LENGTH];
 
-	asprintf(&query, "INSERT INTO users VALUES('','%s','%s');", message->user, message->pass);
+    	SHA1(message->pass, sizeof(message->pass) - 1, hashpas);
+	
+	asprintf(&query, "INSERT INTO users VALUES('','%s','%s');", message->user, hashpas);
 	ulog("%s", query);
 	free(query);
 
