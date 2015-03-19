@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed 18 Mar 2015 12:31:32 AM IRST
+ * [] Last Modified : Thu 19 Mar 2015 11:25:43 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
 
 	int server_port_number = atoi(argv[1]);
 	int server_socket_fd = net_init(server_port_number);
-	int max_socket_fd = server_socket_fd;
 
 	while (1) {
 		int fd;
