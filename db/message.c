@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed Jan 28 17:28:05 2015
+ * [] Last Modified : Thu 19 Mar 2015 11:50:18 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -19,14 +19,14 @@
 
 int serialize_message(FILE *dest, const struct message *message)
 {
-	int retval = fprintf(dest, "%s %s %s %d\n%s", message->verb,
-			message->dest_id, message->src_id,
-			message->m_size, message->body);
+	int retval = fprintf(dest, "%s %s %s %s", message->verb,
+			message->user_id, message->pass,
+			message->user);
 	if (retval < 0)
 		sdie("Socket:");
-	ulog("%s %s %s %d\n%s", message->verb,
-			message->dest_id, message->src_id,
-			message->m_size, message->body);
+	ulog("%s %s %s %s", message->verb,
+			message->user_id, message->pass,
+			message->user);
 	fflush(dest);
 	return retval;
 }
@@ -39,22 +39,18 @@ int deserialize_message(FILE *src, struct message *message)
 		return -1;
 	retval += strlen(message->verb);
 
-	if (fscanf(src, "%s", message->dest_id) != 1)
+	if (fscanf(src, "%s", message->user_id) != 1)
 		return -1;
-	retval += strlen(message->dest_id);
+	retval += strlen(message->user_id);
 
-	if (fscanf(src, "%s", message->src_id) != 1)
+	if (fscanf(src, "%s", message->pass) != 1)
 		return -1;
-	retval += strlen(message->src_id);
+	retval += strlen(message->pass);
 
-	if (fscanf(src, "%d", &message->m_size) != 1)
+	if (fscanf(src, "%s", message->user) != 1)
 		return -1;
+	retval += strlen(message->user);
 
-	message->body = malloc(message->m_size * sizeof(char) + 1);
-	/* Read message body start indicator ('\n') */
-	fgetc(src);
-	retval += fread(message->body, message->m_size,
-			sizeof(char), src);
-
+	
 	return retval;
 }

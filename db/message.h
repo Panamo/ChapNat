@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Wed 18 Mar 2015 12:34:48 AM IRST
+ * [] Last Modified : Thu 19 Mar 2015 11:47:57 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -17,33 +17,18 @@
 
 /*
  * message header fields must be separate with ' ', and
- * connection created over TCP so field sequence is important.
- * after message header there is just ONE '\n' and then message
- * body come.
- *
- * @verb: send join leave check
- *
- * @dest_id: It can be both group or a single client UUID
- *
- * @src_id: single source client UUID
- *
- * @size: sizeof message body in bytes
+ * connection created over TCP so field sequence is important
  *
  * +------------+--------------------------+------------+
- * |    verb    |   user_id  |     pass    |    size    |
+ * |    verb    |   user_id  |     pass    |    user    |
  * +------------+--------------------------+------------+
- * |                                                    |
- * |                  Message Body                      |
- * |                                                    |
- * +----------------------------------------------------+
 */
 
 struct message {
 	char verb[10];
-	char dest_id[255];
-	char src_id[255];
-	int m_size;
-	char *body;
+	char user_id[255];
+	char user[255];
+	char pass[255];
 };
 
 int serialize_message(FILE *dest, const struct message *message);
