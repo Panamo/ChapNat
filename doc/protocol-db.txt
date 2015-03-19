@@ -45,7 +45,12 @@ TCP
 	pass = password
 	user = username
 
-<<<<<<< HEAD
+=> sign-up:
+	verb = sgup
+	user_id = ?
+	pass = password
+	user = username
+
 => sign-in successfull:
 	verb = st00
 	user_id = user ID in database
@@ -69,10 +74,3 @@ TCP
 	user_id = WTF
 	pass = ?
 	user = ?
-
-=======
-=> sign-up:
-	verb = sgup
-	user_id = ?
-	pass = password
-	user = username
