@@ -1,8 +1,10 @@
 Chapat
 ======
 #Introduction
-Chapnat(Chapal Application of Telecommunication, The New One),is a GapApp application server  
-This project written completely by pure C and BSD sockets under ubuntu and gcc  
+Chapnat(Chapal Application of Telecommunication, The New One),
+is a GapApp & GapNap application server  
+This project written completely by pure C and BSD sockets
+under ubuntu and gcc (please note that we use some other library)  
 In this project we using kernel-coding style from Linus Torvalds and using some
 script from kernel to validate our code against that.  
 This project also worked on Darwin 14.1.0  
