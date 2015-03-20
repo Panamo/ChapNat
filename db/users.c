@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Fri 20 Mar 2015 03:05:27 PM IRST
+ * [] Last Modified : Fri 20 Mar 2015 10:01:27 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <libpq-fe.h>
 #include <openssl/sha.h>
 
 #include "message.h"
@@ -20,6 +21,20 @@
 #include "users.h"
 #include "common.h"
 #include "asprintf.h"
+
+PQconn *open_user(void)
+{
+	PQconn *retval;
+	const char *dburl;
+
+	dburl = "postgresql://postgre:Parham13730321@localhost/users";
+	retval = PQconnectdb(dburl);
+}
+
+
+void close_user()
+{
+}
 
 void add_user(const struct message *message, int socket)
 {

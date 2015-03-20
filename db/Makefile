@@ -10,7 +10,7 @@
 P=Chapat-db
 OBJ=main.o common.o command.o net.o message.o users.o \
     asprintf.o
-LIB=
+LIB= libpq
 MLIB= -lssl -lcrypto
 
 ifdef LIB
