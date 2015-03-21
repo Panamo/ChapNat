@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Fri 20 Mar 2015 12:15:24 AM IRST
+ * [] Last Modified : Sat 21 Mar 2015 10:35:20 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -28,16 +28,17 @@ int main(int argc, char *argv[])
 		udie("usage : server_port_number");
 
 	int server_port_number = atoi(argv[1]);
+
 	net_init(server_port_number);
 
 	while (1) {
 		int fd;
 		struct message message;
-		
+
 		fd = accept_connection();
 		if (recv_message(&message, fd) <= 0)
 			close(fd);
-		
+
 		command_dispatcher(fd, &message);
 		close(fd);
 	}
