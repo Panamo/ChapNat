@@ -29,7 +29,7 @@ Our coding style based on kernel standard.
 #Dependencies
 1. [GLib 2.42.1](https://developer.gnome.org/glib/2.42/)
 2. [LibPQ 1.9.4](http://www.postgresql.org/docs/9.4/static/index.html)
-3. [LibSSH 2.1]
+3. [LibSSH 2.1]()
 
 #Installation
 Going to src folder and execute following command
