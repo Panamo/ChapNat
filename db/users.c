@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sat 21 Mar 2015 10:36:07 AM IRST
+ * [] Last Modified : Sat 21 Mar 2015 01:10:19 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -27,7 +27,7 @@ PGconn *open_user(void)
 	PGconn *retval;
 	const char *dburl;
 
-	dburl = "postgresql://postgres:Parham13730321@localhost/users";
+	dburl = "postgresql://postgres:Parham13730321@localhost/chapat";
 	retval = PQconnectdb(dburl);
 
 	/* Check to see that the backend connection was successfully made */
@@ -55,16 +55,33 @@ void add_user(const struct message *message, int socket)
 
 	SHA1(message->pass, sizeof(message->pass) - 1, hashpas);
 
-	asprintf(&query, "INSERT INTO users VALUES('','%s','%s');",
+	asprintf(&query, "INSERT INTO users (username, password) VALUES('%s','%s') RETURNING ID;",
 			message->user, hashpas);
 	ulog("%s", query);
 
 	PGconn *conn = open_user();
+	PGresult *res;
 
-	PQexec(conn, query);
+	res = PQexec(conn, query);
+	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+		strcpy(replay.verb, "st11");
+		strcpy(replay.user_id, "-");
+		strcpy(replay.user, "-");
+		strcpy(replay.pass, "-");
+
+		send_message(&replay, socket);
+
+		fprintf(stderr, "INSERT failed: %s", PQerrorMessage(conn));
+		PQfinish(conn);
+		exit(1);
+	}
+
 	close_user(conn);
 
+	PQclear(res);
 	free(query);
+
+	ulog("%s", PQgetvalue(res, 0, 0));
 
 	strcpy(replay.verb, "st10");
 	strcpy(replay.user_id, "0");
