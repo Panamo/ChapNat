@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Fri 20 Mar 2015 10:01:27 PM IRST
+ * [] Last Modified : Sat 21 Mar 2015 08:52:54 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,18 +22,29 @@
 #include "common.h"
 #include "asprintf.h"
 
-PQconn *open_user(void)
+PGconn *open_user(void)
 {
-	PQconn *retval;
+	PGconn *retval;
 	const char *dburl;
 
 	dburl = "postgresql://postgre:Parham13730321@localhost/users";
 	retval = PQconnectdb(dburl);
+	
+	/* Check to see that the backend connection was successfully made */
+	if (PQstatus(retval) != CONNECTION_OK) {
+		fprintf(stderr, "Connection to database failed: %s",
+				PQerrorMessage(retval));
+		PQfinish(retval);
+		exit(1);
+	}
+
+	return retval;
 }
 
 
-void close_user()
+void close_user(PGconn *conn)
 {
+	PQfinish(conn);
 }
 
 void add_user(const struct message *message, int socket)
@@ -46,6 +57,11 @@ void add_user(const struct message *message, int socket)
 	
 	asprintf(&query, "INSERT INTO users VALUES('','%s','%s');", message->user, hashpas);
 	ulog("%s", query);
+
+	PGconn *conn = open_user();
+	PQexec(conn, query);
+	close_user(conn);
+
 	free(query);
 
 	strcpy(replay.verb, "st10");

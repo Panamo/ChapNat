@@ -7,10 +7,10 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-P=Chapat-db
+P=Chapat-db.out
 OBJ=main.o common.o command.o net.o message.o users.o \
     asprintf.o
-LIB= libpq
+LIB=libpq
 MLIB= -lssl -lcrypto
 
 ifdef LIB
