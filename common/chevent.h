@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 03:00:57 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 03:38:10 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -16,7 +16,8 @@
 struct chevent {
 	void (*handler)(const struct chmessage *message,
 			const void *user_data);
-	int (*dispatcher)(const void *data);
+	int (*dispatcher)(const void *indata,
+			const void *staticdata);
 	const void *data;
 
 	struct chevent *next;
@@ -35,7 +36,8 @@ void chevent_register_handler(struct chevent *event,
 			const void *user_data));
 
 void chevent_register_dispatcher(struct chevent *event,
-		int (*dispatchet)(const void *data));
+		int (*dispatchet)(const void *indata,
+			const void *staticdata));
 
 void chevent_register_data(struct chevent *event,
 		const void *data);

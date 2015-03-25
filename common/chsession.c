@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 03:27:18 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 03:48:01 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,6 +23,7 @@ struct chsession *chsession_new(void)
 	new = malloc(sizeof(struct chsession));
 	new->head = NULL;
 	new->cleaner = NULL;
+	return new;
 }
 
 void chsession_free(struct chsession *session)
@@ -48,7 +49,7 @@ void chsession_register_cleaner(struct chsession *session,
 void chsession_add_event(struct chsession *session,
 		struct chevent *event)
 {
-	if (session->head) {
+	if (!session->head) {
 		session->head = event;
 		event->next = NULL;
 		return;
