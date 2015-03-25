@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 03:48:01 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 04:12:31 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,10 +23,11 @@ struct chsession *chsession_new(void)
 	new = malloc(sizeof(struct chsession));
 	new->head = NULL;
 	new->cleaner = NULL;
+	new->dispatcher = NULL;
 	return new;
 }
 
-void chsession_free(struct chsession *session)
+void chsession_delete(struct chsession *session)
 {
 	struct chevent *it, *old;
 
@@ -35,9 +36,10 @@ void chsession_free(struct chsession *session)
 		if (session->cleaner)
 			session->cleaner(it);
 		old = it->next;
-		free(it);
+		chevent_delete(it);
 		it = old;
 	}
+	free(session);
 }
 
 void chsession_register_cleaner(struct chsession *session,
@@ -45,6 +47,14 @@ void chsession_register_cleaner(struct chsession *session,
 {
 	session->cleaner = cleaner;
 }
+
+void chsession_register_dispatcher(struct chsession *session,
+		int (*dispatcher)(const struct chevent *event,
+			const void *data))
+{
+	session->dispatcher = dispatcher;
+}
+
 
 void chsession_add_event(struct chsession *session,
 		struct chevent *event)
@@ -70,7 +80,7 @@ void chsession_remove_event(struct chsession *session,
 {
 }
 
-void chsession_dispatcher(const struct chsession *session,
+void chsession_dispatch(const struct chsession *session,
 		const void *data,
 		const struct chmessage *message,
 		const void *user_data)
@@ -79,7 +89,8 @@ void chsession_dispatcher(const struct chsession *session,
 	
 	it = session->head;
 	while (it) {
-		chevent_minor_dispatcher(it, data, message, user_data);
+		if (session->dispatcher(it, data))
+			chevent_minor_dispatcher(it, message, user_data);
 		it = it->next;
 	}
 }
