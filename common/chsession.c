@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 04:12:31 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 07:15:58 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -74,10 +74,25 @@ void chsession_add_event(struct chsession *session,
 	event->next = NULL;
 }
 
-/* TODO */
 void chsession_remove_event(struct chsession *session,
-		const struct chevent *event)
+		const void *data)
 {
+	struct chevent *it, *old;
+	
+	it = session->head;
+	while (it->next &&
+			!session->dispatcher(it->next, data)) {
+		it = it->next;
+	}
+	if (it->next &&
+			session->dispatcher(it->next, data)) {
+		old = it->next;
+		it->next = it->next->next;
+		if (session->cleaner)
+			session->cleaner(old);
+		chevent_delete(old);
+	}
+
 }
 
 void chsession_dispatch(const struct chsession *session,

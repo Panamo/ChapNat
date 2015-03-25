@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 04:12:19 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 07:20:14 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -46,7 +46,7 @@ int event_dispatcher(const struct chevent *event,
 
 void event_cleaner(struct chevent *event)
 {
-	free(event->data);
+	free((int *)event->data);
 }
 
 int main(int argc, char *argv[])
@@ -79,6 +79,8 @@ int main(int argc, char *argv[])
 	*fd = 100;
 	chsession_dispatch(session, send_id, NULL, fd);
 	chsession_dispatch(session, recv_id, NULL, fd);
+	chsession_remove_event(session, recv_id);
+	chsession_dispatch(session, send_id, NULL, fd);
 	free(fd);
 
 	chsession_delete(session);
