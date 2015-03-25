@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 02:12:53 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 02:59:45 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -16,7 +16,7 @@
 #include "chmessage.h"
 #include "chevent.h"
 
-struct chevent *chevnet_new(void)
+struct chevent *chevent_new(void)
 {
 	struct chevent *new = malloc(sizeof(struct chevent));
 	new->handler = NULL;

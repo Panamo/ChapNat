@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 02:34:58 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 03:00:57 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,7 +22,7 @@ struct chevent {
 	struct chevent *next;
 };
 
-struct chevent *chevnet_new(void);
+struct chevent *chevent_new(void);
 
 /*
  * please before using this function,
