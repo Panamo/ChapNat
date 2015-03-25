@@ -26,7 +26,8 @@ Chapnat
 This is simple library for event dispatching using gnome C OO design.
 we use this library in chapat db and connection. you can use it for
 other projcets.  
-This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.
+This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.  
+library source code avaiable at /common.
 
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
