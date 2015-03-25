@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 02:12:54 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 02:21:45 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,6 +22,10 @@ struct chevent {
 
 struct chevent *chevnet_new(void);
 
+/*
+ * please before using this function,
+ * free user_data in chevent
+*/
 void chevent_delete(struct chevent *event);
 
 void chevent_register_handler(struct chevent *event,
@@ -34,6 +38,10 @@ void chevent_register_dispatcher(struct chevent *event,
 void chevent_register_data(struct chevent *event,
 		const void *data);
 
+/*
+ * this function first call dispatcher@chevent and if it
+ * return 1 then it call handler@chevent.
+*/
 void chevent_minor_dispatcher(const struct chevent *event,
 		const void *data,
 		const struct chmessage *message,
