@@ -22,6 +22,12 @@ Chapnat
   |  
   \ resolver -> find best route between chapnats  
 
+#KamyLib
+This is simple library for event dispatching using gnome C OO design.
+we use this library in chapat db and connection. you can use it for
+other projcets.  
+This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.
+
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
 Our coding style based on kernel standard.
