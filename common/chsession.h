@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 02:36:56 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 03:01:17 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -30,7 +30,7 @@ void chsession_register_cleaner(struct chsession *session,
 		void (*cleaner)(struct chevent *event));
 
 void chsession_add_event(struct chsession *session,
-		const struct chevent *event);
+		struct chevent *event);
 
 /* TODO */
 void chsession_remove_event(struct chsession *session,
