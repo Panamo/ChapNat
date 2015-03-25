@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-03-2015
  *
- * [] Last Modified : Wed 25 Mar 2015 02:21:45 PM IRDT
+ * [] Last Modified : Wed 25 Mar 2015 02:34:58 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,6 +18,8 @@ struct chevent {
 			const void *user_data);
 	int (*dispatcher)(const void *data);
 	const void *data;
+
+	struct chevent *next;
 };
 
 struct chevent *chevnet_new(void);
