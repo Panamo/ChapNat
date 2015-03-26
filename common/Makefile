@@ -7,8 +7,8 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-P=klib
-OBJ=main.o chsession.o chevent.o
+P=Klib.a
+OBJ=chsession.o chevent.o
 LIB=
 MLIB=
 
@@ -21,10 +21,10 @@ CFLAGS=-Wall -O0 -g -std=gnu11
 LDLIBS=$(MLIB)
 endif
 ASFLAGS=-Wall -O0 -g
+CFLAGS+=-fPIC
 
 $(P): $(OBJ)
-	$(CC) -o $(P) $(OBJ) $(LDLIBS)
-main.o:
+	ar rcs $(P) $(OBJ)
 chsession.o:
 chevent.o:
 
