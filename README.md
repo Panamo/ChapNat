@@ -28,7 +28,14 @@ we use this library in chapat db and connection. you can use it for
 other projcets.  
 This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.  
 library source code avaiable at /common.
-
+## How KamyLib work
+first we making chevents for our events with `chevent_new()` then add some unique data
+to them with `chevent_register_data()` after that add all our events into chsession.
+atfer all we can call `chsession_dispatch()` for event dispatching with following syntax :
+* session : chsession
+* data : void * -> used for event distinguishing.
+* message : chmessage
+* user data : void * -> this data pass into event handler.
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
 Our coding style based on kernel standard.
