@@ -11,16 +11,18 @@ This project also worked on Darwin 14.1.0
 
 For more information of implementation see doc/protocol files.  
 
-Chapnat  
-  |  
-  |  
-  \ connection -> create communication links  
-  |  
-  |  
-  \ db -> control users and group authentication  
-  |  
-  |  
-  \ resolver -> find best route between chapnats  
+```
+Chapnat
+  |
+  |
+  |-> connection : create communication links
+  |
+  |
+  |-> db : control users and group authentication
+  |
+  |
+  |-> resolver : find best route between chapnats
+```
 
 #KamyLib
 This is simple library for event dispatching using gnome C OO design.
