@@ -36,6 +36,7 @@ atfer all we can call `chsession_dispatch()` for event dispatching with followin
 * data : void * -> used for event distinguishing.
 * message : chmessage
 * user data : void * -> this data pass into event handler.
+
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
 Our coding style based on kernel standard.
