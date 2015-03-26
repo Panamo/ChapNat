@@ -39,9 +39,9 @@ atfer all we can call `chsession_dispatch()` for event dispatching with followin
 * user data : void * -> this data pass into event handler.
 
 ##Future of KamyLib
-in the future following features is added into KamyLib
+in the future following features will be added into KamyLib
 * mutlithreading support.
-* asynchronous event dispatching with thread queue named chqueue.
+* asynchronous event dispatching with thread safe queue named chqueue.
 
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
