@@ -8,8 +8,8 @@
 # =======================================
 
 P=Chapat-db.out
-OBJ=main.o common.o command.o net.o message.o users.o \
-    asprintf.o
+OBJ=main.o common.o net.o message.o users.o \
+    asprintf.o Klib.a events.o
 LIB=libpq
 MLIB= -lssl -lcrypto
 
@@ -28,11 +28,11 @@ $(P): $(OBJ)
 	$(CC) -o $(P) $(OBJ) $(LDLIBS)
 main.o:
 common.o: common.h
-command.o: command.h users.h
 net.o: net.h
 message.o: message.h
 users.o: users.h
 asprintf.o: asprintf.h
+events.o: events.h users.h
 
 .PHONY: clean
 clean:

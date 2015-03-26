@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-03-2015
  *
- * [] Last Modified : Fri 27 Mar 2015 12:23:18 AM IRDT
+ * [] Last Modified : Fri 27 Mar 2015 12:55:14 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -59,7 +59,7 @@ static int event_dispatcher(const struct chevent *event,
 	return 0;
 }
 
-struct chsession *init_events(void)
+struct chsession *events_init(void)
 {
 	struct chsession *session;
 	char *sgup_id;

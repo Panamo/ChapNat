@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-03-2015
  *
- * [] Last Modified : Thu 26 Mar 2015 11:21:05 PM IRDT
+ * [] Last Modified : Fri 27 Mar 2015 12:55:25 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,6 +13,6 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
-struct chsession *init_events(void);
+struct chsession *events_init(void);
 
 #endif
