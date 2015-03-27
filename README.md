@@ -31,8 +31,8 @@ other projcets.
 This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.  
 library source code avaiable at /common.
 
-##How KamyLib work
-first we making chevents for our events with `chevent_new()` then add some unique data
+##How KamyLib works
+First we make chevents for our events with `chevent_new()` then add some unique data
 to them with `chevent_register_data()` after that add all our events into chsession.
 atfer all we can call `chsession_dispatch()` for event dispatching with following syntax :
 * session : chsession
