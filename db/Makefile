@@ -11,7 +11,7 @@ P=Chapat-db.out
 OBJ=main.o common.o net.o message.o users.o \
     asprintf.o Klib.a events.o
 LIB=libpq
-MLIB= -lssl -lcrypto
+MLIB=
 
 ifdef LIB
 CFLAGS=-Wall -O0 -g -std=gnu11 \

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sat 21 Mar 2015 01:10:19 PM IRST
+ * [] Last Modified : Sun 29 Mar 2015 01:00:09 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <libpq-fe.h>
-#include <openssl/sha.h>
 
 #include "message.h"
 #include "net.h"
@@ -32,7 +31,7 @@ PGconn *open_user(void)
 
 	/* Check to see that the backend connection was successfully made */
 	if (PQstatus(retval) != CONNECTION_OK) {
-		fprintf(stderr, "Connection to database failed: %s",
+		fprintf(stderr, "Connection to database failed: %s\n",
 				PQerrorMessage(retval));
 		PQfinish(retval);
 		exit(1);
@@ -51,12 +50,9 @@ void add_user(const struct message *message, int socket)
 {
 	struct message replay;
 	char *query;
-	unsigned char hashpas[SHA_DIGEST_LENGTH];
-
-	SHA1(message->pass, sizeof(message->pass) - 1, hashpas);
 
 	asprintf(&query, "INSERT INTO users (username, password) VALUES('%s','%s') RETURNING ID;",
-			message->user, hashpas);
+			message->user, message->pass);
 	ulog("%s", query);
 
 	PGconn *conn = open_user();
@@ -71,7 +67,7 @@ void add_user(const struct message *message, int socket)
 
 		send_message(&replay, socket);
 
-		fprintf(stderr, "INSERT failed: %s", PQerrorMessage(conn));
+		fprintf(stderr, "INSERT failed: %s\n", PQerrorMessage(conn));
 		PQfinish(conn);
 		exit(1);
 	}
@@ -95,12 +91,9 @@ void get_user(const struct message *message, int socket)
 {
 	struct message replay;
 	char *query;
-	unsigned char hashpas[SHA_DIGEST_LENGTH];
-
-	SHA1(message->pass, sizeof(message->pass) - 1, hashpas);
 
 	asprintf(&query, "SELECT * FROM users WHERE username='%s' and password='%s';",
-			message->user, hashpas);
+			message->user, message->pass);
 	ulog("%s", query);
 	free(query);
 
