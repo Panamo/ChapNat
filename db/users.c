@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun 29 Mar 2015 01:00:09 AM IRDT
+ * [] Last Modified : Sun 29 Mar 2015 02:22:25 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -59,7 +59,7 @@ void add_user(const struct message *message, int socket)
 	PGresult *res;
 
 	res = PQexec(conn, query);
-	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		strcpy(replay.verb, "st11");
 		strcpy(replay.user_id, "-");
 		strcpy(replay.user, "-");
@@ -73,18 +73,16 @@ void add_user(const struct message *message, int socket)
 	}
 
 	close_user(conn);
-
-	PQclear(res);
 	free(query);
 
-	ulog("%s", PQgetvalue(res, 0, 0));
-
 	strcpy(replay.verb, "st10");
-	strcpy(replay.user_id, "0");
+	strcpy(replay.user_id, PQgetvalue(res, 0, 0));
 	strcpy(replay.user, "-");
 	strcpy(replay.pass, "-");
 
 	send_message(&replay, socket);
+	
+	PQclear(res);
 }
 
 void get_user(const struct message *message, int socket)
