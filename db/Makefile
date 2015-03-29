@@ -33,6 +33,9 @@ message.o: message.h
 users.o: users.h
 asprintf.o: asprintf.h
 events.o: events.h users.h
+Klib.a:
+	$(MAKE) -C ../common/
+	cp ../common/Klib.a .
 
 .PHONY: clean
 clean:
