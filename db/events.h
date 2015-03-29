@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-03-2015
  *
- * [] Last Modified : Fri 27 Mar 2015 12:55:25 AM IRDT
+ * [] Last Modified : Sun 29 Mar 2015 10:16:59 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,5 +14,7 @@
 #define EVENTS_H
 
 struct chsession *events_init(void);
+
+void events_clear(struct chsession *session);
 
 #endif

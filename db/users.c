@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 25-01-2015
  *
- * [] Last Modified : Sun 29 Mar 2015 02:22:25 AM IRDT
+ * [] Last Modified : Sun 29 Mar 2015 10:09:40 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -53,7 +53,6 @@ void add_user(const struct message *message, int socket)
 
 	asprintf(&query, "INSERT INTO users (username, password) VALUES('%s','%s') RETURNING ID;",
 			message->user, message->pass);
-	ulog("%s", query);
 
 	PGconn *conn = open_user();
 	PGresult *res;
@@ -92,14 +91,33 @@ void get_user(const struct message *message, int socket)
 
 	asprintf(&query, "SELECT * FROM users WHERE username='%s' and password='%s';",
 			message->user, message->pass);
-	ulog("%s", query);
+
+	PGconn *conn = open_user();
+	PGresult *res;
+
+	res = PQexec(conn, query);
+	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+		strcpy(replay.verb, "st01");
+		strcpy(replay.user_id, "-");
+		strcpy(replay.user, "-");
+		strcpy(replay.pass, "-");
+
+		send_message(&replay, socket);
+
+		fprintf(stderr, "SELECT failed: %s\n", PQerrorMessage(conn));
+		PQfinish(conn);
+		exit(1);
+	}
+
+	close_user(conn);
 	free(query);
 
 	strcpy(replay.verb, "st00");
-	strcpy(replay.user_id, "0");
+	strcpy(replay.user_id, PQgetvalue(res, 0, 0));
 	strcpy(replay.user, "-");
 	strcpy(replay.pass, "-");
 
 	send_message(&replay, socket);
 
+	PQclear(res);
 }
