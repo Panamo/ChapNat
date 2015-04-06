@@ -45,6 +45,14 @@ in the future following features will be added into KamyLib
 * mutlithreading support.
 * asynchronous event dispatching with thread safe queue named chqueue.
 
+
+#Resolver
+for resolving userID of person and find server that containing his socket we use
+chptr protocol. we design this protocol in transport layer on top of IP ! :-). we do
+this just for having fun ! this protocol basically is a DHT and we use TTL and masssege
+distributing for creating it.
+
+
 #Contribution
 If you have bug or idea about this project send me an [email](mailto:parham.alvani@gmail.com)  
 Our coding style based on kernel standard.
