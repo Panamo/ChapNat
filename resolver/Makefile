@@ -8,7 +8,7 @@
 # =======================================
 
 P=Chapat-resolver.out
-OBJ=main.o common.o
+OBJ=main.o common.o chptr.o
 LIB=
 MLIB=
 

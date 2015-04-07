@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Tue 07 Apr 2015 02:14:26 AM IRDT
+ * [] Last Modified : Tue 07 Apr 2015 08:30:25 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -90,8 +90,10 @@ int main(int argc, char *argv[])
 	chptr->verb[3] = 'd';
 	chptr->ans = 1;
 	chptr->qus = 0;
+	chptr->ttl = 45;
 	chptr->dest_ip = daddr;
 	chptr->user_id = 1373;
+	chptr->check = chptr_checksum(chptr);
 
 
 	struct sockaddr_in servaddr;

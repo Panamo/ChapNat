@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 07-04-2015
  *
- * [] Last Modified : Tue 07 Apr 2015 02:06:26 AM IRDT
+ * [] Last Modified : Tue 07 Apr 2015 08:29:30 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,5 +24,7 @@ struct chptrhdr {
 	uint32_t user_id;
 	uint32_t check;
 };
+
+uint32_t chptr_checksum(const struct chptrhdr *chptr);
 
 #endif
