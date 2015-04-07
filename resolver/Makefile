@@ -25,7 +25,7 @@ CFLAGS+=-DDEBUG
 
 $(P): $(OBJ)
 	$(CC) -o $(P) $(OBJ) $(LDLIBS)
-main.o: common.h
+main.o: common.h chptr.h
 common.o: common.h
 
 .PHONY: clean

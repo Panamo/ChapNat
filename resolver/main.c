@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Tue 07 Apr 2015 01:38:53 AM IRDT
+ * [] Last Modified : Tue 07 Apr 2015 02:14:26 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,6 +22,7 @@
 #include <unistd.h>
 
 #include "common.h"
+#include "chptr.h"
 
 int main(int argc, char *argv[])
 {
@@ -50,7 +51,7 @@ int main(int argc, char *argv[])
 		sdie("setsockopt()");
 
 	/* Calculate total packet size */
-	packet_len = sizeof(struct iphdr);
+	packet_len = sizeof(struct iphdr) + sizeof(struct chptrhdr);
 	packet = malloc(packet_len);
 	if (!packet)
 		sdie("malloc()");
@@ -80,6 +81,18 @@ int main(int argc, char *argv[])
 	ip->saddr = saddr;
 	/* Destination Address */
 	ip->daddr = daddr;
+	
+	struct chptrhdr *chptr = (struct chptrhdr *) (packet + sizeof(struct iphdr));
+
+	chptr->verb[0] = 's';
+	chptr->verb[1] = 'e';
+	chptr->verb[2] = 'n';
+	chptr->verb[3] = 'd';
+	chptr->ans = 1;
+	chptr->qus = 0;
+	chptr->dest_ip = daddr;
+	chptr->user_id = 1373;
+
 
 	struct sockaddr_in servaddr;
 
