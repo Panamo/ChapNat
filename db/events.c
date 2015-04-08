@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-03-2015
  *
- * [] Last Modified : Sun 29 Mar 2015 10:16:41 AM IRDT
+ * [] Last Modified : Wed 08 Apr 2015 09:32:08 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,9 +14,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../common/chmessage.h"
-#include "../common/chevent.h"
-#include "../common/chsession.h"
+#include <chmessage.h>
+#include <chevent.h>
+#include <chsession.h>
 
 #include "message.h"
 #include "users.h"

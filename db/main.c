@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 30-12-2014
  *
- * [] Last Modified : Sun 29 Mar 2015 10:39:02 AM IRDT
+ * [] Last Modified : Wed 08 Apr 2015 09:32:37 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -18,9 +18,9 @@
 #include <string.h>
 #include <signal.h>
 
-#include "../common/chmessage.h"
-#include "../common/chevent.h"
-#include "../common/chsession.h"
+#include <chmessage.h>
+#include <chevent.h>
+#include <chsession.h>
 
 #include "message.h"
 #include "net.h"
