@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Tue 07 Apr 2015 08:30:25 AM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 01:15:18 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,21 +23,16 @@
 
 #include "common.h"
 #include "chptr.h"
+#include "chbuff.h"
+#include "dht.h"
 
 int main(int argc, char *argv[])
 {
-
-	if (argc < 3)
-		udie("usage: %s <source IP> <destination IP>\n", argv[0]);
-
 	unsigned long daddr;
-	unsigned long saddr;
 	int sockfd;
-	int packet_len;
-	char *packet;
+	struct chbuff *packet;
 
-	saddr = inet_addr(argv[1]);
-	daddr = inet_addr(argv[2]);
+	daddr = inet_addr("255.255.255.255");
 
 	sockfd = socket(AF_INET, SOCK_RAW, 110);
 	if (sockfd < 0)
@@ -49,73 +44,83 @@ int main(int argc, char *argv[])
 	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL,
 				(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
+	/* We want BROADCAST */
+	if (setsockopt(sockfd, SO_BROADCAST, SOL_SOCKET,
+				(const char *) &on, sizeof(on)) == -1)
+		sdie("setsockopt()");
 
-	/* Calculate total packet size */
-	packet_len = sizeof(struct iphdr) + sizeof(struct chptrhdr);
-	packet = malloc(packet_len);
-	if (!packet)
-		sdie("malloc()");
-	memset(packet, 0, packet_len);
 
-	/* IP header (do you believe ??) */
-	struct iphdr *ip = (struct iphdr *) packet;
+	/* Create chbuff */
+	packet = chbuff_new();
 
 	/* Version */
-	ip->version = 4;
+	packet->ip.version = 4;
 	/* Header Length */
 	/* can you use (packet_len * 8) / 32 ? */
-	ip->ihl = 5;
+	packet->ip.ihl = 5;
 	/* Type Of Service */
-	ip->tos = 0;
+	packet->ip.tos = 0;
 	/* Total length */
-	ip->tot_len = htons(packet_len);
-	/* ID */
-	ip->id = rand();
+	packet->ip.tot_len = htons(packet->len);
 	/* Fragmentation Offset */
-	ip->frag_off = 0;
+	packet->ip.frag_off = 0;
 	/* Time To Live */
-	ip->ttl = 73;
+	packet->ip.ttl = 73;
 	/* Protocol */
-	ip->protocol = 110;
-	/* Source Address */
-	ip->saddr = saddr;
+	packet->ip.protocol = 110;
 	/* Destination Address */
-	ip->daddr = daddr;
+	packet->ip.daddr = daddr;
 	
-	struct chptrhdr *chptr = (struct chptrhdr *) (packet + sizeof(struct iphdr));
+	packet->chptr.verb[0] = 's';
+	packet->chptr.verb[1] = 'e';
+	packet->chptr.verb[2] = 'n';
+	packet->chptr.verb[3] = 'd';
+	packet->chptr.ans = 0;
+	packet->chptr.qus = 1;
+	packet->chptr.ttl = 45;
+	packet->chptr.dest_ip = daddr;
+	packet->chptr.user_id = 1373;
+	packet->chptr.check = chptr_checksum(&packet->chptr);
 
-	chptr->verb[0] = 's';
-	chptr->verb[1] = 'e';
-	chptr->verb[2] = 'n';
-	chptr->verb[3] = 'd';
-	chptr->ans = 1;
-	chptr->qus = 0;
-	chptr->ttl = 45;
-	chptr->dest_ip = daddr;
-	chptr->user_id = 1373;
-	chptr->check = chptr_checksum(chptr);
+	chbuff_serialize(packet);
 
+	struct sockaddr_in addr;
+	size_t addr_len = sizeof(addr);
 
-	struct sockaddr_in servaddr;
+	addr.sin_family = AF_INET;
+	addr.sin_addr.s_addr = daddr;
+	memset(&addr.sin_zero, 0, sizeof(addr.sin_zero));
 
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = daddr;
-	memset(&servaddr.sin_zero, 0, sizeof(servaddr.sin_zero));
-
-	puts("sending... :-|");
-	if (sendto(sockfd, packet, packet_len, 0,
-				(struct sockaddr *) &servaddr,
-				sizeof(servaddr)) < 1)
+	if (sendto(sockfd, packet->buff, packet->len, 0,
+				(struct sockaddr *) &addr,
+				addr_len) < 1)
 		sdie("sendto()");
-	puts("sent.... :-)");
+	chbuff_delete(packet);
 
-	puts("receiving... :-|");
-	if (recvfrom(sockfd, packet, packet_len, 0, NULL, NULL) < 1)
-		sdie("recvfrom()");
-	puts("received.... :-)");
-	
-	/* printing into file */
-	FILE *packetfile;
-	packetfile = fopen("Packet.bin", "w");
-	fwrite(packet, packet_len, 1, packetfile);
+	while (1) {
+		packet = chbuff_new();
+		if (recvfrom(sockfd, packet->buff, packet->len, 0,
+					(struct sockaddr *) &addr,
+					(socklen_t *) &addr_len) < 1)
+			sdie("recvfrom()");
+		chbuff_deserialize(packet);
+		if (packet->chptr.qus) {
+			unload_info(packet);
+			chbuff_delete(packet);
+			packet = chbuff_new();
+			load_info(packet);
+			chbuff_serialize(packet);
+			if (sendto(sockfd, packet->buff, packet->len, 0,
+						(struct sockaddr *) &addr,
+						addr_len) < 1)
+				sdie("sendto()");
+			chbuff_delete(packet);
+		}
+		else if (packet->chptr.ans) {
+			unload_info(packet);
+			chbuff_delete(packet);
+		} else {
+			chbuff_delete(packet);
+		}
+	}
 }

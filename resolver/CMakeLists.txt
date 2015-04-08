@@ -6,4 +6,5 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable (Chapat-resolver.out main.c common.c chptr.c)
+add_executable (Chapat-resolver.out main.c common.c chptr.c
+	chbuff.c)
