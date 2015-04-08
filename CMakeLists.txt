@@ -16,8 +16,8 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 subdirs (common)
 subdirs (db)
+subdirs (resolver)
 #subdirs (connection)
-#subdirs (resolver)
 
 # The version number
 set (Chapat_MAJOR_VERSION 1)
