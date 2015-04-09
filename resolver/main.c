@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 09:08:45 PM IRDT
+ * [] Last Modified : Fri 10 Apr 2015 12:01:33 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
 				(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
 
+	/* Starting broadcasting .... */
 
 	/* Create chbuff */
 	packet = chbuff_new();
@@ -106,6 +107,7 @@ int main(int argc, char *argv[])
 		sdie("sendto()");
 	chbuff_delete(packet);
 
+	/* Starting server .... */
 	while (1) {
 		packet = chbuff_new();
 		if (recvfrom(sockfd, packet->buff, packet->len, 0,
