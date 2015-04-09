@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 09-04-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 12:51:18 AM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 05:19:50 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,6 +24,7 @@ struct chbuff *chbuff_new(void)
 	new = malloc(sizeof(struct chbuff));
 	new->buff = malloc(sizeof(struct chptrhdr) + sizeof(struct iphdr));
 	new->len = sizeof(struct chptrhdr) + sizeof(struct iphdr);
+	memset(new->buff, 0, new->len);
 	return new;
 }
 
@@ -39,9 +40,9 @@ void chbuff_deserialize(struct chbuff *buff)
 {
 	/* read ip header */
 	memcpy(&buff->ip, buff->buff, sizeof(struct iphdr));
-	/* read chptr header */
-	memcpy(&buff->chptr, buff->buff + sizeof(struct iphdr), sizeof(struct chptrhdr));
 
+	/* read chptr header */
+	memcpy(&buff->chptr, buff->buff + sizeof(struct chptrhdr), sizeof(struct chptrhdr));
 }
 
 void chbuff_delete(struct chbuff *buff)

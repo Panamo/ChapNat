@@ -5,13 +5,17 @@
  *
  * [] Creation Date : 09-04-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 12:51:25 AM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 04:55:56 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
 #ifndef CHBUFF_H
 #define CHBUFF_H
+
+#include <netinet/ip.h>
+
+#include "chptr.h"
 
 struct chbuff {
 	size_t len;

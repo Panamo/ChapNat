@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 01:15:18 AM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 05:20:07 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -28,7 +28,8 @@
 
 int main(int argc, char *argv[])
 {
-	unsigned long daddr;
+	uint32_t daddr;
+	uint32_t saddr;
 	int sockfd;
 	struct chbuff *packet;
 
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 				(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
 	/* We want BROADCAST */
-	if (setsockopt(sockfd, SO_BROADCAST, SOL_SOCKET,
+	if (setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST,
 				(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
 
@@ -104,7 +105,7 @@ int main(int argc, char *argv[])
 					(socklen_t *) &addr_len) < 1)
 			sdie("recvfrom()");
 		chbuff_deserialize(packet);
-		if (packet->chptr.qus) {
+		if (packet->chptr.qus == 1) {
 			unload_info(packet);
 			chbuff_delete(packet);
 			packet = chbuff_new();
@@ -116,7 +117,7 @@ int main(int argc, char *argv[])
 				sdie("sendto()");
 			chbuff_delete(packet);
 		}
-		else if (packet->chptr.ans) {
+		else if (packet->chptr.ans == 1) {
 			unload_info(packet);
 			chbuff_delete(packet);
 		} else {
