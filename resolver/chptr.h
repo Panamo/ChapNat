@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 07-04-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 12:17:20 AM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 08:23:17 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -15,13 +15,12 @@
 
 struct chptrhdr {
 	uint8_t verb[4];
-	uint16_t ttl;
 	/* flags */
 	uint16_t qus:1,
 		 ans:1,
 		 unused:14;
-	uint32_t dest_ip;
-	uint32_t user_id;
+	uint32_t haddr;
+	uint16_t hport;
 	uint32_t check;
 };
 

@@ -5,27 +5,36 @@
  *
  * [] Creation Date : 09-04-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 05:20:59 PM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 09:07:49 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
 #include <stdio.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
 
 #include "chptr.h"
 #include "chbuff.h"
 #include "dht.h"
+#include "hinf.h"
 
 void unload_info(struct chbuff *buff)
 {
-	printf("%x\n", buff->ip.saddr);
-	printf("%c\n", buff->chptr.verb[0]);
-	printf("%c\n", buff->chptr.verb[1]);
-	printf("%c\n", buff->chptr.verb[2]);
-	printf("%c\n", buff->chptr.verb[3]);
-	printf("%d\n", buff->chptr.ans);
-	printf("%d\n", buff->chptr.qus);
+	if (buff->chptr.haddr != haddr ||
+			buff->chptr.hport != hport) {
+		struct in_addr ihaddr =
+			(struct in_addr) {buff->chptr.haddr};
+
+		printf("%s\n", inet_ntoa(ihaddr));
+		printf("%hu\n", buff->chptr.hport);
+		printf("%c\n", buff->chptr.verb[0]);
+		printf("%c\n", buff->chptr.verb[1]);
+		printf("%c\n", buff->chptr.verb[2]);
+		printf("%c\n", buff->chptr.verb[3]);
+		printf("%d\n", buff->chptr.ans);
+		printf("%d\n", buff->chptr.qus);
+	}
 }
 
 void load_info(struct chbuff *buff)
@@ -52,7 +61,7 @@ void load_info(struct chbuff *buff)
 	buff->chptr.verb[3] = 'd';
 	buff->chptr.ans = 1;
 	buff->chptr.qus = 0;
-	buff->chptr.ttl = 45;
-	buff->chptr.user_id = 1373;
+	buff->chptr.hport = hport;
+	buff->chptr.haddr = haddr;
 	buff->chptr.check = chptr_checksum(&buff->chptr);
 }

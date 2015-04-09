@@ -6,9 +6,9 @@
 #
 # [] Creation Date : 03-04-2015
 #
-# [] Last Modified : Sat 04 Apr 2015 12:14:52 AM IRDT
+# [] Last Modified : Thu 09 Apr 2015 08:45:03 PM IRDT
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-tcpdump -i lo -s 65535 -w $(date +"%F_%H:%m:%S").pcap
+tcpdump -i wlan0 -s 65535 -w $(date +"%F_%H:%m:%S").pcap

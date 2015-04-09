@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 31-03-2015
  *
- * [] Last Modified : Thu 09 Apr 2015 05:20:07 PM IRDT
+ * [] Last Modified : Thu 09 Apr 2015 09:08:45 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -26,10 +26,19 @@
 #include "chbuff.h"
 #include "dht.h"
 
+uint32_t haddr;
+uint16_t hport;
+
 int main(int argc, char *argv[])
 {
+	
+	if (argc < 3)
+		udie("usage: %s <Propagated IP> <Propagated Port>\n", argv[0]);
+
+	hport = atoi(argv[2]);
+	haddr = inet_addr(argv[1]);
+
 	uint32_t daddr;
-	uint32_t saddr;
 	int sockfd;
 	struct chbuff *packet;
 
@@ -78,9 +87,8 @@ int main(int argc, char *argv[])
 	packet->chptr.verb[3] = 'd';
 	packet->chptr.ans = 0;
 	packet->chptr.qus = 1;
-	packet->chptr.ttl = 45;
-	packet->chptr.dest_ip = daddr;
-	packet->chptr.user_id = 1373;
+	packet->chptr.haddr = haddr;
+	packet->chptr.hport = hport;
 	packet->chptr.check = chptr_checksum(&packet->chptr);
 
 	chbuff_serialize(packet);
@@ -105,7 +113,7 @@ int main(int argc, char *argv[])
 					(socklen_t *) &addr_len) < 1)
 			sdie("recvfrom()");
 		chbuff_deserialize(packet);
-		if (packet->chptr.qus == 1) {
+		if (packet->chptr.qus) {
 			unload_info(packet);
 			chbuff_delete(packet);
 			packet = chbuff_new();
@@ -117,7 +125,7 @@ int main(int argc, char *argv[])
 				sdie("sendto()");
 			chbuff_delete(packet);
 		}
-		else if (packet->chptr.ans == 1) {
+		else if (packet->chptr.ans) {
 			unload_info(packet);
 			chbuff_delete(packet);
 		} else {
