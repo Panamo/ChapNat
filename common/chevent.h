@@ -3,19 +3,21 @@
  * ========================================
  * [] File Name : chevent.h
  *
- * [] Creation Date : 25-03-2015
- *
- * [] Last Modified : Wed 25 Mar 2015 04:06:42 PM IRDT
+ * [] Creation Date : 30-04-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef CHEVENT_H
 #define CHEVENT_H
 
 struct chevent {
 	void (*handler)(const struct chmessage *message,
-			const void *user_data);
+		const void *user_data);
+
 	void *data;
 
 	struct chevent *next;
@@ -30,18 +32,18 @@ struct chevent *chevent_new(void);
 void chevent_delete(struct chevent *event);
 
 void chevent_register_handler(struct chevent *event,
-		void (*handler)(const struct chmessage *message,
-			const void *user_data));
+	void (*handler)(const struct chmessage *message,
+		const void *user_data));
 
 void chevent_register_data(struct chevent *event,
-		void *data);
+	void *data);
 
 /*
  * this function first call dispatcher@chevent and if it
  * return 1 then it call handler@chevent.
 */
 void chevent_minor_dispatcher(const struct chevent *event,
-		const struct chmessage *message,
-		const void *user_data);
+	const struct chmessage *message,
+	const void *user_data);
 
 #endif

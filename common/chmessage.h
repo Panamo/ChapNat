@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : chmessage.h
  *
- * [] Creation Date : 25-03-2015
- *
- * [] Last Modified : Wed 25 Mar 2015 01:45:17 PM IRDT
+ * [] Creation Date : 30-04-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef CHMESSAGE_H
 #define CHMESSAGE_H
