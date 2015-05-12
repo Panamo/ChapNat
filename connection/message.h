@@ -13,6 +13,8 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include <stdio.h>
+
 #define MESSAGE_SIZE (255 * 4 + 32)
 
 /*
@@ -42,7 +44,7 @@ struct message {
 	char verb[10];
 	char dest_id[255];
 	char src_id[255];
-	int m_size;
+	size_t m_size;
 	char *body;
 };
 

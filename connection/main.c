@@ -11,13 +11,8 @@
  * =======================================
 */
 #include <glib.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <syslog.h>
 #include <string.h>
 
 #include "message.h"
@@ -26,6 +21,8 @@
 #include "users.h"
 #include "command.h"
 #include "sockets.h"
+
+static int run = 1;
 
 int main(int argc, char *argv[])
 {
@@ -38,7 +35,7 @@ int main(int argc, char *argv[])
 
 	init_user();
 
-	while (1) {
+	while (run) {
 		int i = 0;
 		fd_set socket_fds_set;
 
@@ -48,25 +45,23 @@ int main(int argc, char *argv[])
 			FD_SET(*get_socket(i), &socket_fds_set);
 
 		if (select(max_socket_fd + 1, &socket_fds_set,
-					NULL, NULL, NULL) < 0)
+			NULL, NULL, NULL) < 0)
 			sdie("select");
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
 			int fd = accept_connection();
-			
+
 			max_socket_fd = (max_socket_fd < fd) ? fd :
-				max_socket_fd;
+			                max_socket_fd;
 
 			struct message message;
-			
-			if (recv_message(&message, fd) <= 0)
-					close(fd);
-			
+
+
 			ulog("Message body: %s\n", message.body);
 			ulog("Message verb: %s\n", message.verb);
 			ulog("Message dest: %s\n", message.dest_id);
 			ulog("Message src : %s\n", message.src_id);
-			
+
 			command_dispatcher(fd, &message);
 
 		}
@@ -76,18 +71,24 @@ int main(int argc, char *argv[])
 
 				/* initiate message struct for when errors occurred ... */
 				memset(&message, 0, sizeof(message));
-				
+
 				if (recv_message(&message,
-							*get_socket(i)) <= 0) {
-					ulog("%d socket errored\n", *get_socket(i));
+					*get_socket(i)) <= 0) {
+					ulog("%d socket errored\n",
+						*get_socket(i));
 					close(*get_socket(i));
 					del_socket(get_socket(i));
 				} else {
-					ulog("Message body: %s\n", message.body);
-					ulog("Message verb: %s\n", message.verb);
-					ulog("Message dest: %s\n", message.dest_id);
-					ulog("Message src : %s\n", message.src_id);
-					command_dispatcher(*get_socket(i), &message);
+					ulog("Message body: %s\n",
+						message.body);
+					ulog("Message verb: %s\n",
+						message.verb);
+					ulog("Message dest: %s\n",
+						message.dest_id);
+					ulog("Message src : %s\n",
+						message.src_id);
+					command_dispatcher(*get_socket(i),
+						&message);
 				}
 			}
 		}
