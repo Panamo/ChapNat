@@ -41,7 +41,7 @@ void udie(const char *fmt, ...)
 	vsprintf(buf, fmt, args);
 	va_end(args);
 
-	int len = strlen(buf);
+	size_t len = strlen(buf);
 
 	buf[len] = '\n';
 	buf[len + 1] = 0;

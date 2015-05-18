@@ -15,12 +15,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-#include <sys/time.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <unistd.h>
 
 #include "common.h"
 #include "chptr.h"
@@ -32,7 +29,7 @@ uint16_t hport;
 
 int main(int argc, char *argv[])
 {
-	
+
 	if (argc < 3)
 		udie("usage: %s <Propagated IP> <Propagated Port>\n", argv[0]);
 
@@ -53,11 +50,11 @@ int main(int argc, char *argv[])
 
 	/* We shall provide IP headers */
 	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL,
-				(const char *) &on, sizeof(on)) == -1)
+		(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
 	/* We want BROADCAST */
 	if (setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST,
-				(const char *) &on, sizeof(on)) == -1)
+		(const char *) &on, sizeof(on)) == -1)
 		sdie("setsockopt()");
 
 	/* Starting broadcasting .... */
@@ -82,7 +79,7 @@ int main(int argc, char *argv[])
 	packet->ip.protocol = 110;
 	/* Destination Address */
 	packet->ip.daddr = daddr;
-	
+
 	packet->chptr.verb[0] = 's';
 	packet->chptr.verb[1] = 'e';
 	packet->chptr.verb[2] = 'n';
@@ -103,8 +100,8 @@ int main(int argc, char *argv[])
 	memset(&addr.sin_zero, 0, sizeof(addr.sin_zero));
 
 	if (sendto(sockfd, packet->buff, packet->len, 0,
-				(struct sockaddr *) &addr,
-				addr_len) < 1)
+		(struct sockaddr *) &addr,
+		addr_len) < 1)
 		sdie("sendto()");
 	chbuff_delete(packet);
 
@@ -112,8 +109,8 @@ int main(int argc, char *argv[])
 	while (1) {
 		packet = chbuff_new();
 		if (recvfrom(sockfd, packet->buff, packet->len, 0,
-					(struct sockaddr *) &addr,
-					(socklen_t *) &addr_len) < 1)
+			(struct sockaddr *) &addr,
+			(socklen_t *) &addr_len) < 1)
 			sdie("recvfrom()");
 		chbuff_deserialize(packet);
 		if (packet->chptr.qus) {
@@ -123,8 +120,8 @@ int main(int argc, char *argv[])
 			load_info(packet);
 			chbuff_serialize(packet);
 			if (sendto(sockfd, packet->buff, packet->len, 0,
-						(struct sockaddr *) &addr,
-						addr_len) < 1)
+				(struct sockaddr *) &addr,
+				addr_len) < 1)
 				sdie("sendto()");
 			chbuff_delete(packet);
 		}

@@ -16,7 +16,6 @@
 #include <netinet/ip.h>
 
 #include "chbuff.h"
-#include "chptr.h"
 
 struct chbuff *chbuff_new(void)
 {
@@ -34,7 +33,8 @@ void chbuff_serialize(struct chbuff *buff)
 	/* write ip header */
 	memcpy(buff->buff, &buff->ip, sizeof(struct iphdr));
 	/* write chptr header */
-	memcpy(buff->buff + sizeof(struct iphdr), &buff->chptr, sizeof(struct chptrhdr));
+	memcpy(buff->buff + sizeof(struct iphdr), &buff->chptr,
+		sizeof(struct chptrhdr));
 }
 
 void chbuff_deserialize(struct chbuff *buff)
@@ -43,7 +43,8 @@ void chbuff_deserialize(struct chbuff *buff)
 	memcpy(&buff->ip, buff->buff, sizeof(struct iphdr));
 
 	/* read chptr header */
-	memcpy(&buff->chptr, buff->buff + sizeof(struct chptrhdr), sizeof(struct chptrhdr));
+	memcpy(&buff->chptr, buff->buff + sizeof(struct chptrhdr),
+		sizeof(struct chptrhdr));
 }
 
 void chbuff_delete(struct chbuff *buff)

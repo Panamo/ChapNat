@@ -18,8 +18,8 @@ struct chptrhdr {
 	uint8_t verb[4];
 	/* flags */
 	uint16_t qus:1,
-		 ans:1,
-		 unused:14;
+		ans:1,
+		unused:14;
 	uint32_t haddr;
 	uint16_t hport;
 	uint32_t check;
