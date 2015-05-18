@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : main.c
  *
- * [] Creation Date : 31-03-2015
- *
- * [] Last Modified : Fri 10 Apr 2015 12:01:33 AM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdio.h>
 #include <stdlib.h>

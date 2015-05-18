@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : users.h
  *
- * [] Creation Date : 25-01-2015
- *
- * [] Last Modified : Thu 19 Mar 2015 11:30:49 PM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef USERS_H
 #define USERS_H

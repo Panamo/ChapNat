@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : net.c
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Tue Jan 27 16:32:00 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <string.h>
 #include <stdio.h>

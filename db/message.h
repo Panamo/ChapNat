@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : message.h
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Thu 19 Mar 2015 11:47:57 AM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef MESSAGE_H
 #define MESSAGE_H

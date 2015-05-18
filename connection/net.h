@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : net.h
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Sat Jan 24 03:45:17 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef SERVER_NET_H
 #define SERVER_NET_H

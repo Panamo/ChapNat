@@ -1,14 +1,15 @@
 /*
  * In The Name Of God
  * ========================================
- * [] File Name : server.c
+ * [] File Name : main.c
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Wed 28 Jan 2015 08:28:01 PM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <glib.h>
 #include <stdlib.h>

@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : events.c
  *
- * [] Creation Date : 26-03-2015
- *
- * [] Last Modified : Wed 08 Apr 2015 09:32:08 PM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdio.h>
 #include <stdlib.h>

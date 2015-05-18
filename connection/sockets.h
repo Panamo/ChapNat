@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : sockets.h
  *
- * [] Creation Date : 28-01-2015
- *
- * [] Last Modified : Wed Jan 28 15:24:23 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef SOCKETS_H
 #define SOCKETS_H

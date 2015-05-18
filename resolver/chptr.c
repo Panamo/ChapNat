@@ -1,14 +1,15 @@
 /*
  * In The Name Of God
  * ========================================
- * [] File Name : ip.c
+ * [] File Name : chptr.c
  *
- * [] Creation Date : 03-04-2015
- *
- * [] Last Modified : Tue 07 Apr 2015 08:27:02 AM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdint.h>
 

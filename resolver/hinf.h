@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : hinf.h
  *
- * [] Creation Date : 09-04-2015
- *
- * [] Last Modified : Thu 09 Apr 2015 08:19:40 PM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef HINF_H
 #define HINF_H

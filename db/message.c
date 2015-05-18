@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : message.c
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Fri 20 Mar 2015 12:16:02 AM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdio.h>
 #include <string.h>

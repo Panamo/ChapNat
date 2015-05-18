@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : users.c
  *
- * [] Creation Date : 25-01-2015
- *
- * [] Last Modified : Wed Jan 28 15:50:24 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <glib.h>
 #include <string.h>

@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : asprintf.h
  *
- * [] Creation Date : 06-03-2015
- *
- * [] Last Modified : Fri 06 Mar 2015 12:31:42 AM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef ASPRINTF_H
 #define ASPRINTF_H

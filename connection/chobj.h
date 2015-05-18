@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : chobj.h
  *
- * [] Creation Date : 25-01-2015
- *
- * [] Last Modified : Mon Jan 26 18:48:31 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef CHOBJ_H
 #define CHOBJ_H

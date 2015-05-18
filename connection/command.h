@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : command.h
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Mon Jan 26 18:16:26 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef COMMAND_H
 #define COMMAND_H

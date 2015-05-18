@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : asprintf.c
  *
- * [] Creation Date : 01-02-2015
- *
- * [] Last Modified : Fri 20 Mar 2015 12:19:42 AM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdio.h>
 #include <stdlib.h>

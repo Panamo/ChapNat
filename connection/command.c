@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : command.c
  *
- * [] Creation Date : 30-12-2014
- *
- * [] Last Modified : Wed Jan 28 14:21:10 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <string.h>
 #include <stdio.h>

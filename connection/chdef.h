@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : chdef.h
  *
- * [] Creation Date : 28-01-2015
- *
- * [] Last Modified : Wed Jan 28 15:47:21 2015
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 /*
  * container_of - cast a member of a structure out to the containing structure

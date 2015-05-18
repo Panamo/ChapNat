@@ -1,14 +1,15 @@
 /*
  * In The Name Of God
  * ========================================
- * [] File Name : users.h
+ * [] File Name : users.c
  *
- * [] Creation Date : 25-01-2015
- *
- * [] Last Modified : Sun 29 Mar 2015 10:09:40 AM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #include <stdio.h>
 #include <stdlib.h>

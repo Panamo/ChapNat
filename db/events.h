@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : events.h
  *
- * [] Creation Date : 26-03-2015
- *
- * [] Last Modified : Sun 29 Mar 2015 10:16:59 AM IRDT
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef EVENTS_H
 #define EVENTS_H

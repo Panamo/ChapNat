@@ -3,12 +3,13 @@
  * ========================================
  * [] File Name : resolve.h
  *
- * [] Creation Date : 16-03-2015
- *
- * [] Last Modified : Mon 16 Mar 2015 04:50:19 PM IRST
+ * [] Creation Date : 18-05-2015
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef RESOLVE_H
 #define RESOLVE_H
