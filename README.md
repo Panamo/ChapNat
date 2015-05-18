@@ -1,7 +1,7 @@
 Chapat
 ======
 #Introduction
-Chapnat(Chapal Application of Telecommunication, The New One),
+Chapat (Chapal Application of Telecommunication),
 is a GapApp & GapNap application server  
 This project written completely by pure C and BSD sockets
 under ubuntu and gcc (please note that we use some other library)  
@@ -12,7 +12,7 @@ This project also worked on Darwin 14.1.0
 For more information of implementation see doc/protocol files.  
 
 ```
-Chapnat
+Chapat
   |
   |
   |-> connection : create communication links
@@ -21,15 +21,15 @@ Chapnat
   |-> db : control users and group authentication
   |
   |
-  |-> resolver : find best route between chapnats
+  |-> resolver : find best route between chapat
 ```
 
 #KamyLib
 This is simple library for event dispatching using gnome C OO design.
 we use this library in chapat db and connection. you can use it for
-other projcets.  
+other projects.  
 This library named after our friend *Seyed Kamyar Seyed Ghasemi Pour*.  
-library source code avaiable at /common.
+library source code available at /common.
 
 ##How KamyLib works
 First we make chevents for our events with `chevent_new()` then add some unique data
@@ -42,7 +42,7 @@ atfer all we can call `chsession_dispatch()` for event dispatching with followin
 
 ##Future of KamyLib
 in the future following features will be added into KamyLib
-* mutlithreading support.
+* multi threading support.
 * asynchronous event dispatching with thread safe queue named chqueue.
 
 
