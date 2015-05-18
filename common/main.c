@@ -11,7 +11,6 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-*/
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -21,14 +20,14 @@
 #include "chsession.h"
 
 void send_handler(const struct chmessage *message,
-		const void *user_data)
+	const void *user_data)
 {
 	const int *fd = (const int *) user_data;
 	printf("send socket fd: %d\n", *fd);
 }
 
 void recv_handler(const struct chmessage *message,
-		const void *user_data)
+	const void *user_data)
 {
 	const int *fd = (const int *) user_data;
 	printf("recv socket fd: %d\n", *fd);
@@ -36,7 +35,7 @@ void recv_handler(const struct chmessage *message,
 
 
 int event_dispatcher(const struct chevent *event,
-		const void *data)
+	const void *data)
 {
 	const int *event_id = (const int *) event->data;
 	const int *data_id = (const int *) data;
@@ -48,7 +47,7 @@ int event_dispatcher(const struct chevent *event,
 
 void event_cleaner(struct chevent *event)
 {
-	free((int *)event->data);
+	free((int *) event->data);
 }
 
 int main(int argc, char *argv[])

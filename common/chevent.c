@@ -11,7 +11,7 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-*/
+
 #include <stdlib.h>
 #include <stdio.h>
 

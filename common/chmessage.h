@@ -11,7 +11,6 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-*/
 #ifndef CHMESSAGE_H
 #define CHMESSAGE_H
 

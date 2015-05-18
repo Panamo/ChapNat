@@ -11,7 +11,7 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-*/
+
 #ifndef CHEVENT_H
 #define CHEVENT_H
 

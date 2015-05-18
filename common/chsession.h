@@ -11,7 +11,6 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-*/
 #ifndef CHSESSION_H
 #define CHSESSION_H
 
