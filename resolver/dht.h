@@ -15,6 +15,7 @@
 #define DHT_H
 
 void unload_info(struct chbuff *buff);
+
 void load_info(struct chbuff *buff);
 
 #endif

@@ -2,14 +2,35 @@ In The Name Of God
 
 Parham Alvani <parham.alvani@gmail.com>
 Mohammad Reza Mahboubi Ardakani <mrmahboubi95@yahoo.com>
+Navid Mashayekhi <navidmsk@gmail.com>
 
 ##############################################################
+
+verbs:
+ resolve
+
+================
+chptr/0.1
+
+* resolve: find server ip address of client_id, then server
+           server connect into found server and store server
+           fd as client fd.
+
+
+
+|------|                 |--------|                |------|
+|GapApp|-----------------|chapat-1|----------------|GapApp|
+|------|                 |--------|                |------|
+                              |
+                              |
+                              |
+|------|                 |--------|                |------|
+|GapApp|-----------------|chapat-2|----------------|GapApp|
+|------|                 |--------|                |------|
 
 resolver component:
 
 Please DO NOT LAUGH.
-
-chptr/0.1:
 
 ip protocol no: 110
 

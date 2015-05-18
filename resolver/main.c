@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	/* Type Of Service */
 	packet->ip.tos = 0;
 	/* Total length */
-	packet->ip.tot_len = htons(packet->len);
+	packet->ip.tot_len = htons((uint16_t) packet->len);
 	/* Fragmentation Offset */
 	packet->ip.frag_off = 0;
 	/* Time To Live */

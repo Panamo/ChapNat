@@ -13,7 +13,6 @@
 */
 #include <stdio.h>
 #include <arpa/inet.h>
-#include <netinet/in.h>
 
 #include "chptr.h"
 #include "chbuff.h"
@@ -23,7 +22,7 @@
 void unload_info(struct chbuff *buff)
 {
 	if (buff->chptr.haddr != haddr ||
-			buff->chptr.hport != hport) {
+	    buff->chptr.hport != hport) {
 		struct in_addr ihaddr =
 			(struct in_addr) {buff->chptr.haddr};
 
@@ -55,7 +54,7 @@ void load_info(struct chbuff *buff)
 	buff->ip.ttl = 73;
 	/* Protocol */
 	buff->ip.protocol = 110;
-	
+
 	buff->chptr.verb[0] = 's';
 	buff->chptr.verb[1] = 'e';
 	buff->chptr.verb[2] = 'n';
