@@ -13,10 +13,10 @@
 */
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <sys/types.h>
 
 #include "message.h"
 #include "net.h"
@@ -24,7 +24,7 @@
 
 static int server_socket_fd;
 
-int net_init(int server_port_number)
+int net_init(uint16_t server_port_number)
 {
 	struct sockaddr_in server_addr;
 
@@ -36,8 +36,8 @@ int net_init(int server_port_number)
 	if (server_socket_fd == -1)
 		sdie("socket()");
 
-	if (bind(server_socket_fd, (struct sockaddr *)&server_addr,
-				sizeof(server_addr)) == -1)
+	if (bind(server_socket_fd, (struct sockaddr *) &server_addr,
+		sizeof(server_addr)) == -1)
 		sdie("bind()");
 
 	if (listen(server_socket_fd, 10) == -1)

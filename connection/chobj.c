@@ -14,16 +14,13 @@
 #include <glib.h>
 #include <string.h>
 #include <stdlib.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-#include <sys/types.h>
 
 #include "chobj.h"
 #include "sockets.h"
 
 struct chobj *chobj_new(const char *id, int socket,
-		struct sockaddr_in addr)
+	struct sockaddr_in addr)
 {
 	struct chobj *new = g_new(struct chobj, 1);
 
@@ -44,13 +41,13 @@ void chobj_del(struct chobj *chobj)
 }
 
 void chobj_add_child(struct chobj *parent,
-		struct chobj *child)
+	struct chobj *child)
 {
 	parent->child = g_slist_append(parent->child, child);
 }
 
 void chobj_del_child(struct chobj *parent,
-		struct chobj *child)
+	struct chobj *child)
 {
 
 }

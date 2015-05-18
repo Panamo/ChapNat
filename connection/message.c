@@ -20,12 +20,12 @@
 
 int serialize_message(FILE *dest, const struct message *message)
 {
-	int return_value = fprintf(dest, "%s %s %s %d\n%s", message->verb,
+	int return_value = fprintf(dest, "%s %s %s %zu\n%s", message->verb,
 		message->dest_id, message->src_id,
 		message->m_size, message->body);
 	if (return_value < 0)
 		sdie("Socket:");
-	ulog("%s %s %s %d\n%s", message->verb,
+	ulog("%s %s %s %zu\n%s", message->verb,
 		message->dest_id, message->src_id,
 		message->m_size, message->body);
 	fflush(dest);
@@ -48,7 +48,7 @@ int deserialize_message(FILE *src, struct message *message)
 		return -1;
 	return_value += strlen(message->src_id);
 
-	if (fscanf(src, "%d", &message->m_size) != 1)
+	if (fscanf(src, "%zu", &message->m_size) != 1)
 		return -1;
 
 	message->body = malloc(message->m_size * sizeof(char) + 1);

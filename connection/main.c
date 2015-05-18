@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "message.h"
 #include "net.h"
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		udie("usage : server_port_number");
 
-	int server_port_number = atoi(argv[1]);
+	uint16_t server_port_number = atoi(argv[1]);
 	int server_socket_fd = net_init(server_port_number);
 	int max_socket_fd = server_socket_fd;
 

@@ -12,15 +12,9 @@
  * Copyright (c) 2015 Parham Alvani.
 */
 #include <glib.h>
-#include <stdio.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <sys/types.h>
 
 #include "sockets.h"
 #include "chobj.h"
-#include "message.h"
 #include "chdef.h"
 #include "users.h"
 #include "common.h"
@@ -36,7 +30,7 @@ void add_socket(int *fd)
 void del_socket(int *fd)
 {
 	struct chobj *find = container_of(fd, struct chobj, fd);
-	
+
 	ulog("Start removing : %s\n", find->id);
 	del_user(find->id);
 	socket_fds = g_slist_remove(socket_fds, fd);

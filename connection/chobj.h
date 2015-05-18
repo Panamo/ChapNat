@@ -23,11 +23,14 @@ struct chobj {
 };
 
 struct chobj *chobj_new(const char *id, int socket,
-		struct sockaddr_in addr);
+	struct sockaddr_in addr);
+
 void chobj_del(struct chobj *chobj);
+
 void chobj_add_child(struct chobj *parent,
-		struct chobj *child);
+	struct chobj *child);
+
 void chobj_del_child(struct chobj *parent,
-		struct chobj *child);
+	struct chobj *child);
 
 #endif

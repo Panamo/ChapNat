@@ -14,7 +14,7 @@
 #ifndef SERVER_NET_H
 #define SERVER_NET_H
 
-int net_init(int server_port_number);
+int net_init(uint16_t server_port_number);
 
 int accept_connection(void);
 
