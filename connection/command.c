@@ -12,12 +12,10 @@
  * Copyright (c) 2015 Parham Alvani.
 */
 #include <string.h>
-#include <stdio.h>
 
 #include "message.h"
 #include "users.h"
 #include "command.h"
-#include "net.h"
 
 void signin_command(const struct message *message, int socket_fd)
 {

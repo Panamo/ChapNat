@@ -15,6 +15,6 @@
 #define COMMAND_H
 
 void command_dispatcher(int socket_fd,
-		const struct message *message);
+	const struct message *message);
 
 #endif

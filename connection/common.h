@@ -19,10 +19,13 @@
 
 void sdie(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
+
 void udie(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
+
 void ulog(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
+
 void slog(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
 
