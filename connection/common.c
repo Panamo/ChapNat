@@ -53,7 +53,7 @@ void udie(const char *fmt, ...)
 void slog(const char *fmt, ...)
 {
 #ifdef DEBUG
-	printf("DEBUG: ");
+	fprintf(stderr, "DEBUG: ");
 	fflush(stdout);
 
 	char buf[MAX_BUFF];
@@ -70,7 +70,7 @@ void slog(const char *fmt, ...)
 void ulog(const char *fmt, ...)
 {
 #ifdef DEBUG
-	printf("DEBUG: ");
+	fprintf(stderr, "DEBUG: ");
 	fflush(stdout);
 
 	char buf[MAX_BUFF];
@@ -80,7 +80,7 @@ void ulog(const char *fmt, ...)
 	vsprintf(buf, fmt, args);
 	va_end(args);
 
-	int len = strlen(buf);
+	size_t len = strlen(buf);
 
 	buf[len] = '\n';
 	buf[len + 1] = 0;

@@ -14,6 +14,8 @@
 #ifndef USERS_H
 #define USERS_H
 
+#include "message.h"
+
 void init_user(void);
 
 void add_user(const struct message *message, int socket);

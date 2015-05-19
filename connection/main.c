@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		udie("usage : server_port_number");
 
+	printf("Welcome to chapat.\n");
+
 	uint16_t server_port_number = atoi(argv[1]);
 	int server_socket_fd = net_init(server_port_number);
 	int max_socket_fd = server_socket_fd;
@@ -51,21 +53,17 @@ int main(int argc, char *argv[])
 			sdie("select");
 
 		if (FD_ISSET(server_socket_fd, &socket_fds_set)) {
-			int fd = accept_connection();
+			int *fd;
 
-			max_socket_fd = (max_socket_fd < fd) ? fd :
+			fd = malloc(sizeof(int));
+
+			*fd = accept_connection();
+
+			ulog("New connection accepted.\n");
+
+			add_socket(fd);
+			max_socket_fd = (max_socket_fd < *fd) ? *fd :
 			                max_socket_fd;
-
-			struct message message;
-
-
-			ulog("Message body: %s\n", message.body);
-			ulog("Message verb: %s\n", message.verb);
-			ulog("Message dest: %s\n", message.dest_id);
-			ulog("Message src : %s\n", message.src_id);
-
-			command_dispatcher(fd, &message);
-
 		}
 		for (i = 0; i < get_socket_size(); i++) {
 			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {

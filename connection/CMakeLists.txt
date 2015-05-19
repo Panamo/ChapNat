@@ -9,6 +9,10 @@
 add_executable (Chapat-connection.out main.c chobj.c common.c command.c
     message.c net.c resolve.c sockets.c users.c)
 
+# Add personal c flags
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11 ")
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -DDEBUG")
+
 find_package (PkgConfig)
 pkg_check_modules (GLIB REQUIRED glib-2.0)
 include_directories (${GLIB_INCLUDE_DIRS})

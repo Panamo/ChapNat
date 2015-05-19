@@ -14,6 +14,8 @@
 #ifndef CHOBJ_H
 #define CHOBJ_H
 
+#include <netinet/in.h>
+
 struct chobj {
 	char id[255];
 	GSList *child;
