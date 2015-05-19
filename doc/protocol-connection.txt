@@ -59,7 +59,7 @@ port: 1373
   src_id = ?
   size = ?
 
-=> join: 
+=> join:
   verb = join
   dest_id = ?
   src_id = ?

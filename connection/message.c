@@ -51,7 +51,7 @@ int deserialize_message(FILE *src, struct message *message)
 	if (fscanf(src, "%zu", &message->m_size) != 1)
 		return -1;
 
-	message->body = malloc(message->m_size * sizeof(char) + 1);
+	message->body = calloc(message->m_size + 1, sizeof(char));
 
 	/* Read message body start indicator ('\n') */
 	fgetc(src);
