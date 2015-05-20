@@ -31,9 +31,12 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		udie("usage : server_port_number");
 
-	printf("Welcome to chapat.\n");
+	printf("Chapat version 2.0, Copyright (C) Chapna Organization\n");
+	printf("Chapat comes with ABSOLUTELY NO WARRANTY\n");
+	printf("This is free software, and you are welcome to redistribute it\n");
+	printf("under certain conditions\n");
 
-	uint16_t server_port_number = atoi(argv[1]);
+	uint16_t server_port_number = (uint16_t) atoi(argv[1]);
 	int server_socket_fd = net_init(server_port_number);
 	int max_socket_fd = server_socket_fd;
 
