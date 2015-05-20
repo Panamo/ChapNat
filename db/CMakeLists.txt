@@ -9,6 +9,10 @@
 add_executable (Chapat-db.out main.c common.c net.c message.c users.c
 	asprintf.c events.c)
 
+# Add personal c flags
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11 ")
+set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -DDEBUG")
+
 find_package (PkgConfig)
 pkg_check_modules (LIBPQ REQUIRED libpq)
 include_directories (${LIBPQ_INCLUDE_DIRS})

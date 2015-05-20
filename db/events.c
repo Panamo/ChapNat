@@ -11,7 +11,6 @@
 /*
  * Copyright (c) 2015 Parham Alvani.
 */
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -25,11 +24,11 @@
 #include "asprintf.h"
 
 static void sgin_handler(const struct chmessage *chmessage,
-		const void *user_data)
+	const void *user_data)
 {
 	const struct message *message;
-	const int* socket_fd;
-	
+	const int *socket_fd;
+
 	socket_fd = (const int *) user_data;
 	message = (const struct message *) chmessage;
 	get_user(message, *socket_fd);
@@ -37,11 +36,11 @@ static void sgin_handler(const struct chmessage *chmessage,
 }
 
 static void sgup_handler(const struct chmessage *chmessage,
-		const void *user_data)
+	const void *user_data)
 {
 	const struct message *message;
-	const int* socket_fd;
-	
+	const int *socket_fd;
+
 	socket_fd = (const int *) user_data;
 	message = (const struct message *) chmessage;
 	add_user(message, *socket_fd);
@@ -57,11 +56,11 @@ static void event_cleaner(struct chevent *event)
 }
 
 static int event_dispatcher(const struct chevent *event,
-		const void *data)
+	const void *data)
 {
 	const char *event_in_name;
 	const char *event_name;
-	
+
 	event_in_name = (const char *) data;
 	event_name = (const char *) event->data;
 	if (!strcmp(event_in_name, event_name))
