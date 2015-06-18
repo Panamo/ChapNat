@@ -15,13 +15,13 @@ For more information of implementation see doc/protocol files.
 Chapat
   |
   |
-  |-> connection : create communication links
+  |-> connection : create and store TCP communication links
   |
   |
   |-> db : control users and group authentication
   |
   |
-  |-> resolver : find best route between chapat
+  |-> resolver : find best route between chapat servers
 ```
 
 #KamyLib
@@ -34,23 +34,24 @@ library source code available at /common.
 ##How KamyLib works
 First we make chevents for our events with `chevent_new()` then add some unique data
 to them with `chevent_register_data()` after that add all our events into chsession.
-atfer all we can call `chsession_dispatch()` for event dispatching with following syntax :
+after all we can call `chsession_dispatch()` for event dispatching with
+following syntax :
 * session : chsession
 * data : void * -> used for event distinguishing.
 * message : chmessage
 * user data : void * -> this data pass into event handler.
 
 ##Future of KamyLib
-in the future following features will be added into KamyLib
+In the future following features will be added into KamyLib
 * multi threading support.
 * asynchronous event dispatching with thread safe queue named chqueue.
 
 
 #Resolver
-for resolving userID of person and find server that containing his socket we use
-chptr protocol. we design this protocol in transport layer on top of IP ! :-). we do
-this just for having fun ! this protocol basically is a DHT and we use TTL and masssege
-distributing for creating it.
+For resolving userID of a person and find server that containing his socket we use
+chptr protocol. we design this protocol in transport layer on top of IP ! :-).
+we do this just for **having fun** ! this protocol basically is a DHT and we use
+controlled flooding with sequence number for implementing it.
 
 
 #Contribution
