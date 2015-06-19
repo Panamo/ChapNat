@@ -72,11 +72,12 @@ int main(int argc, char *argv[])
 			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {
 				struct message message;
 
-				/* initiate message struct for when errors occurred ... */
+				/* initiate message struct */
 				memset(&message, 0, sizeof(message));
 
 				if (recv_message(&message,
 					*get_socket(i)) <= 0) {
+
 					ulog("%d socket errored\n",
 						*get_socket(i));
 					close(*get_socket(i));
