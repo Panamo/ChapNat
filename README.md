@@ -1,5 +1,6 @@
 # ChapNat
-###### [Chapal behind NAT Message Passing System]
+###### Chapal behind NAT Message Passing System
+###### Panamo Organization
 ## Introduction
 This project written completely by pure C and BSD sockets
 under Ubuntu and gcc (please note that we use some other library).
