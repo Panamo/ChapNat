@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		udie("usage : server_port_number");
 
-	printf("Chapat version 2.0, Copyright (C) Chapna Organization\n");
-	printf("Chapat comes with ABSOLUTELY NO WARRANTY\n");
+	printf("ChapNat version 2.0, Copyright (C) Panamo Organization\n");
+	printf("ChapNat comes with ABSOLUTELY NO WARRANTY\n");
 	printf("This is free software, and you are welcome to redistribute it\n");
 	printf("under certain conditions\n");
 
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 				if (recv_message(&message,
 					*get_socket(i)) <= 0) {
 
-					ulog("%d socket errored\n",
+					ulog("%d socket have an error\n",
 						*get_socket(i));
 					close(*get_socket(i));
 					del_socket(get_socket(i));
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 						message.body);
 					ulog("Message verb: %s\n",
 						message.verb);
-					ulog("Message dest: %s\n",
+					ulog("Message dst: %s\n",
 						message.dst_id);
 					ulog("Message src : %s\n",
 						message.src_id);
