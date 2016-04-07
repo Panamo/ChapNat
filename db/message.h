@@ -32,8 +32,8 @@ struct message {
 	char pass[255];
 };
 
-int serialize_message(FILE *dest, const struct message *message);
+int message_serialize(FILE *dst, const struct message *message);
 
-int deserialize_message(FILE *src, struct message *message);
+int message_deserialize(FILE *src, struct message *message);
 
 #endif

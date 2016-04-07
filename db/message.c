@@ -18,9 +18,9 @@
 #include "common.h"
 #include "message.h"
 
-int serialize_message(FILE *dest, const struct message *message)
+int message_serialize(FILE *dst, const struct message *message)
 {
-	int retval = fprintf(dest, "%s %s %s %s", message->verb,
+	int retval = fprintf(dst, "%s %s %s %s", message->verb,
 			message->user_id, message->pass,
 			message->user);
 	if (retval < 0)
@@ -28,11 +28,11 @@ int serialize_message(FILE *dest, const struct message *message)
 	ulog("%s %s %s %s", message->verb,
 			message->user_id, message->pass,
 			message->user);
-	fflush(dest);
+	fflush(dst);
 	return retval;
 }
 
-int deserialize_message(FILE *src, struct message *message)
+int message_deserialize(FILE *src, struct message *message)
 {
 	int retval = 0;
 
