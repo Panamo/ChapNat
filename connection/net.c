@@ -58,7 +58,7 @@ int send_message(const struct message *message, int socket_fd)
 	if (socket_file == NULL)
 		slog("fdopen()");
 
-	return serialize_message(socket_file, message);
+	return message_serialize(socket_file, message);
 }
 
 int recv_message(struct message *message, int socket_fd)
@@ -68,5 +68,5 @@ int recv_message(struct message *message, int socket_fd)
 	if (socket_file == NULL)
 		slog("fdopen()");
 
-	return deserialize_message(socket_file, message);
+	return message_deserialize(socket_file, message);
 }

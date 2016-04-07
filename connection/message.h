@@ -26,14 +26,14 @@
  *
  * @verb: send join leave check
  *
- * @dest_id: It can be both group or a single client UUID
+ * @dst_id: It can be both group or a single client UUID
  *
  * @src_id: single source client UUID
  *
  * @size: sizeof message body in bytes
  *
  * +------------+--------------------------+------------+
- * |    verb    |   dest_id  |    src_id   |    size    |
+ * |    verb    |   dst_id  |    src_id   |    size    |
  * +------------+--------------------------+------------+
  * |                                                    |
  * |                  Message Body                      |
@@ -43,14 +43,14 @@
 
 struct message {
 	char verb[10];
-	char dest_id[255];
+	char dst_id[255];
 	char src_id[255];
 	size_t m_size;
 	char *body;
 };
 
-int serialize_message(FILE *dest, const struct message *message);
+int message_serialize(FILE *dst, const struct message *message);
 
-int deserialize_message(FILE *src, struct message *message);
+int message_deserialize(FILE *src, struct message *message);
 
 #endif

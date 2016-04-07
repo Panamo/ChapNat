@@ -61,13 +61,13 @@ void add_user(const struct message *message, int socket)
 	socklen_t len = 0;
 
 	getsockname(socket, (struct sockaddr *) &client_addr, &len);
-	new = g_hash_table_lookup(users, message->dest_id);
+	new = g_hash_table_lookup(users, message->dst_id);
 	if (new) {
 		ulog("Found\n");
 	} else {
-		ulog("%s is added\n", message->dest_id);
-		new = chobj_new(message->dest_id, socket, client_addr);
-		g_hash_table_insert(users, g_strdup(message->dest_id), new);
+		ulog("%s is added\n", message->dst_id);
+		new = chobj_new(message->dst_id, socket, client_addr);
+		g_hash_table_insert(users, g_strdup(message->dst_id), new);
 	}
 }
 
@@ -80,7 +80,7 @@ void snd_user(const struct message *message, int socket)
 {
 	struct chobj *new;
 
-	new = g_hash_table_lookup(users, message->dest_id);
+	new = g_hash_table_lookup(users, message->dst_id);
 	if (new) {
 		ulog("sned to %s\n", new->id);
 		send_message(message, new->fd);

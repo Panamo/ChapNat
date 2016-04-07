@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 					ulog("Message verb: %s\n",
 						message.verb);
 					ulog("Message dest: %s\n",
-						message.dest_id);
+						message.dst_id);
 					ulog("Message src : %s\n",
 						message.src_id);
 					command_dispatcher(*get_socket(i),

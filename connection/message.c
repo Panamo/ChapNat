@@ -18,21 +18,21 @@
 #include "common.h"
 #include "message.h"
 
-int serialize_message(FILE *dest, const struct message *message)
+int message_serialize(FILE *dest, const struct message *message)
 {
 	int return_value = fprintf(dest, "%s %s %s %zu\n%s", message->verb,
-		message->dest_id, message->src_id,
+		message->dst_id, message->src_id,
 		message->m_size, message->body);
 	if (return_value < 0)
 		sdie("Socket:");
 	ulog("%s %s %s %zu\n%s", message->verb,
-		message->dest_id, message->src_id,
+		message->dst_id, message->src_id,
 		message->m_size, message->body);
 	fflush(dest);
 	return return_value;
 }
 
-int deserialize_message(FILE *src, struct message *message)
+int message_deserialize(FILE *src, struct message *message)
 {
 	int return_value = 0;
 
@@ -40,9 +40,9 @@ int deserialize_message(FILE *src, struct message *message)
 		return -1;
 	return_value += strlen(message->verb);
 
-	if (fscanf(src, "%s", message->dest_id) != 1)
+	if (fscanf(src, "%s", message->dst_id) != 1)
 		return -1;
-	return_value += strlen(message->dest_id);
+	return_value += strlen(message->dst_id);
 
 	if (fscanf(src, "%s", message->src_id) != 1)
 		return -1;
