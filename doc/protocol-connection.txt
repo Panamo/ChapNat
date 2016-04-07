@@ -24,14 +24,14 @@ port: 1373
 	/ invite / block /
 	/ new_group / delivered / sent /
 
-@ dest_id: It can be both group or a single destination client UUID
+@ dst_id: It can be both group or a single destination client UUID
 
 @ src_id: single source client UUID
 
 @ size: sizeof message body in bytes
 
  +------------+-------------+------------+------------+
- |    verb    |   dest_id   |   src_id   |    size    |
+ |    verb    |   dst_id   |   src_id   |    size    |
  +------------+-------------+------------+------------+
  |            |             |            |            |
  +------------+-------------+------------+------------+
@@ -49,18 +49,18 @@ port: 1373
 
 => send:
   verb = send
-  dest_id = receiver_id
+  dst_id = receiver_id
   src_id = sender_id
   size = ?
 
 => get-picture:
   verb = getP
-  dest_id = ?
+  dst_id = ?
   src_id = ?
   size = ?
 
 => join:
   verb = join
-  dest_id = ?
+  dst_id = ?
   src_id = ?
   size = ?
