@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
 
 		FD_ZERO(&socket_fds_set);
 		FD_SET(server_socket_fd, &socket_fds_set);
-		for (i = 0; i < get_socket_size(); i++)
-			FD_SET(*get_socket(i), &socket_fds_set);
+		for (i = 0; i < sockets_size(); i++)
+			FD_SET(*sockets_get(i), &socket_fds_set);
 
 		if (select(max_socket_fd + 1, &socket_fds_set,
 			NULL, NULL, NULL) < 0)
@@ -64,24 +64,24 @@ int main(int argc, char *argv[])
 
 			ulog("New connection accepted.\n");
 
-			add_socket(fd);
+			sockets_add(fd);
 			max_socket_fd = (max_socket_fd < *fd) ? *fd :
 			                max_socket_fd;
 		}
-		for (i = 0; i < get_socket_size(); i++) {
-			if (FD_ISSET(*get_socket(i), &socket_fds_set)) {
+		for (i = 0; i < sockets_size(); i++) {
+			if (FD_ISSET(*sockets_get(i), &socket_fds_set)) {
 				struct message message;
 
 				/* initiate message struct */
 				memset(&message, 0, sizeof(message));
 
 				if (recv_message(&message,
-					*get_socket(i)) <= 0) {
+					*sockets_get(i)) <= 0) {
 
 					ulog("%d socket have an error\n",
-						*get_socket(i));
-					close(*get_socket(i));
-					del_socket(get_socket(i));
+						*sockets_get(i));
+					close(*sockets_get(i));
+					sockets_delete(sockets_get(i));
 				} else {
 					ulog("Message body: %s\n",
 						message.body);
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 						message.dst_id);
 					ulog("Message src : %s\n",
 						message.src_id);
-					command_dispatcher(*get_socket(i),
+					command_dispatcher(*sockets_get(i),
 						&message);
 				}
 			}

@@ -16,12 +16,12 @@
 
 extern GSList *socket_fds;
 
-void add_socket(int *fd);
+void sockets_add(int *fd);
 
-void del_socket(int *fd);
+void sockets_delete(int *fd);
 
-int *get_socket(int index);
+int *sockets_get(int index);
 
-int get_socket_size(void);
+int sockets_size(void);
 
 #endif

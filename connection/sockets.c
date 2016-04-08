@@ -21,27 +21,28 @@
 
 GSList *socket_fds;
 
-void add_socket(int *fd)
+void sockets_add(int *fd)
 {
 	ulog("socket %d is added.\n", *fd);
 	socket_fds = g_slist_append(socket_fds, fd);
 }
 
-void del_socket(int *fd)
+void sockets_delete(int *fd)
 {
 	struct chobj *find = container_of(fd, struct chobj, fd);
 
+	/* How fun .... */
 	ulog("Start removing : %s\n", find->id);
 	del_user(find->id);
 	socket_fds = g_slist_remove(socket_fds, fd);
 }
 
-int *get_socket(int index)
+int *sockets_get(int index)
 {
 	return g_slist_nth_data(socket_fds, index);
 }
 
-int get_socket_size(void)
+int sockets_size(void)
 {
 	return g_slist_length(socket_fds);
 }

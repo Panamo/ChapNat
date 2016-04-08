@@ -29,7 +29,7 @@ struct chobj *chobj_new(const char *id, int socket,
 	strcpy(new->id, id);
 	new->client_addr = addr;
 
-	add_socket(&new->fd);
+	sockets_add(&new->fd);
 
 	return new;
 }
