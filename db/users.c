@@ -27,7 +27,7 @@ PGconn *open_user(void)
 	PGconn *retval;
 	const char *dburl;
 
-	dburl = "postgresql://postgres:Parham13730321@localhost/chapat";
+	dburl = "postgresql://chapnat:1234@localhost/chapnat";
 	retval = PQconnectdb(dburl);
 
 	/* Check to see that the backend connection was successfully made */
